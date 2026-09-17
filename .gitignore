@@ -1,0 +1,12 @@
+# Pythonの仮想環境
+.venv/
+
+# Python実行時に生成されるキャッシュ
+__pycache__/
+*.pyc
+
+# 取得・保存した株価データ
+/data/
+
+# macOSが自動生成するファイル
+.DS_Store
