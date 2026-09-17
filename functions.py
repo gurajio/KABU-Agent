@@ -1,6 +1,7 @@
 import pandas as pd
 import yfinance as yf
 from pathlib import Path
+import json
 
 def get_save_stock_data(code, reflesh = False):
     # 銘柄コードに対応する株価データを取得・保存する。
@@ -42,5 +43,85 @@ def get_all_timestamps(all_data):
     return all_times
 
 
-def validate_order(portfolio, aciton):
-    
+def validate_order(portfolio, order, sold_today):
+    symbol = order["symbol"]
+    quantity = order["quantity"]
+    price = order["price"]
+    cost = order["cost"]
+
+    position = portfolio["positions"].get(symbol, {})
+    holding_quantity = position.get("quantity", 0)
+    cash = portfolio["cash"]
+
+    if order["action"] == "buy":
+        # 当日売却した銘柄は再購入しない
+        if symbol in sold_today:
+            return False
+
+        required_cash = price * quantity + cost
+        return cash >= required_cash
+
+    elif order["action"] == "sell":
+        # 保有数量を超えて売れない
+        if quantity > holding_quantity:
+            return False
+
+        # 売却後の現金を確認する
+        return cash + price * quantity - cost >= 0
+
+    # keepなど、売買しない場合
+    return False
+
+def update_portfolio(portfolio, order, current_time):
+    symbol = order["symbol"]
+    price = order["price"]
+    quantity = order["quantity"]
+    cost = order["cost"]
+
+    positions = portfolio["positions"]
+
+    if order["action"] == "buy":
+        # 初めて購入する銘柄
+        if symbol not in positions:
+            positions[symbol] = {
+                "quantity": quantity,
+                "entry_price": price,
+                "entry_time": str(current_time),
+            }
+
+        # すでに保有している銘柄の買い増し
+        else:
+            position = positions[symbol]
+
+            new_quantity = position["quantity"] + quantity
+
+            position["entry_price"] = (
+                position["entry_price"] * position["quantity"]
+                + price * quantity
+            ) / new_quantity
+
+            position["quantity"] = new_quantity
+
+        # 購入代金とコストを差し引く
+        portfolio["cash"] -= price * quantity + cost
+
+    elif order["action"] == "sell":
+        position = positions[symbol]
+
+        # 保有数量を減らす
+        position["quantity"] -= quantity
+
+        # 売却代金からコストを引いて受け取る
+        portfolio["cash"] += price * quantity - cost
+
+        # 全株売却したら保有情報を削除する
+        if position["quantity"] == 0:
+            del positions[symbol]
+
+    return portfolio
+
+
+def save_portfolio(portfolio, path="portfolio.json"):
+    # 現在の口座状況をJSONファイルに上書き保存する
+    with open(path, "w", encoding="utf-8") as file:
+        json.dump(portfolio, file, ensure_ascii=False, indent=4)

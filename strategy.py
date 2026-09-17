@@ -12,6 +12,7 @@ def random_strategy(
     buy_probability=0.1,
     sell_probability=0.1,
 ):
+    # 仮に実装しているだけなので、取引数や手数料等は省いている
     # 対象銘柄の保有情報を取得する
     position = portfolio["positions"].get(symbol_code, {})
     has_position = position.get("quantity", 0) > 0
@@ -20,7 +21,9 @@ def random_strategy(
     
     # 株価を取得
     stock_price = symbol_dataframe.loc[datetime]["Open"]
-
+    quantity = 100
+    cost = 0
+    
     if value < buy_probability:
         action = "buy"
 
@@ -33,8 +36,10 @@ def random_strategy(
     return {
             "symbol": symbol_code,
             "price": stock_price,
+            "quantity":quantity,
             "action": action,
             "reason": f"ランダム条件で{action}と判断",
+            "cost":cost,
         }
 
 
