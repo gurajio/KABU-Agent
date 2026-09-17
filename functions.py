@@ -29,3 +29,18 @@ def get_save_stock_data(code, reflesh = False):
     df.to_csv(path)
     
     return df
+
+def get_all_timestamps(all_data):
+    # すべての銘柄をまとめたデータ（辞書型）を用いてすべてのタイムスタンプを取得する
+    all_times = []
+    
+    for df in all_data.values():
+        all_times.extend(df.index)
+    
+    all_times = sorted(set(all_times))
+    
+    return all_times
+
+
+def validate_order(portfolio, aciton):
+    

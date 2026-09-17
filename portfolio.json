@@ -1,0 +1,10 @@
+{
+    "cash": 1000000,
+    "positions": {
+        "402A.T":{
+            "quantity":100,
+            "entry_price":150,
+            "entry_time":"2026-07-21 09:00:00+09:00"
+        }
+    }
+}
