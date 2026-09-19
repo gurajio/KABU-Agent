@@ -41,37 +41,3 @@ def random_strategy(
             "reason": f"ランダム条件で{action}と判断",
             "cost":cost,
         }
-
-
-if __name__ == "__main__":
-    # 口座状況を読み込む
-    with open("portfolio.json", "r", encoding="utf-8") as file:
-        portfolio = json.load(file)
-
-    # 判断する日時
-    datetime = pd.Timestamp("2026-07-21 09:05:00+09:00")
-
-    # 株価データを読み込む
-    df = pd.read_csv(
-        "data/402A.T_5m.csv",
-        index_col=0,
-        parse_dates=[0],
-    )
-
-    # 判断時刻までに確定した足だけを取り出す
-    history = df[df.index + pd.Timedelta(minutes=5) <= datetime]
-
-    demoinputData = {
-        "datetime": datetime,
-        "symbol_code": "402A.T",
-        "symbol_dataframe": history,
-        "portfolio": portfolio,
-    }
-
-    # 乱数生成器を作る
-    rng = random.Random(43)
-
-    # 売買判断を実行して表示する
-    for _ in range(10):
-        result = random_strategy(**demoinputData, rng=rng)
-        print(result)

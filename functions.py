@@ -125,3 +125,34 @@ def save_portfolio(portfolio, path="portfolio.json"):
     # 現在の口座状況をJSONファイルに上書き保存する
     with open(path, "w", encoding="utf-8") as file:
         json.dump(portfolio, file, ensure_ascii=False, indent=4)
+
+def get_valuation_data(stock_data, portfolio, current_time):
+    # 5分足の開始時刻に5分を加え、足が終了する時刻を評価日時にする
+    valuation_time = current_time + pd.Timedelta(minutes=5)
+
+    latest_prices = {}
+
+    # 保有している銘柄だけ評価価格を取り出す
+    for symbol in portfolio["positions"]:
+        df = stock_data[symbol]
+
+        # 同じ日の、処理済みの時刻までのデータに絞る
+        day_data = df[
+            (df.index.date == current_time.date())
+            & (df.index <= current_time)
+        ]
+
+        if day_data.empty:
+            raise ValueError(
+                f"{symbol} の {current_time.date()} の評価価格がありません"
+            )
+
+        # その銘柄の最後の行から終値を取得する
+        last_row = day_data.iloc[-1]
+
+        latest_prices[symbol] = {
+            "latest_price": float(last_row["Close"]),
+            "price_datetime": last_row.name,
+        }
+
+    return latest_prices, valuation_time

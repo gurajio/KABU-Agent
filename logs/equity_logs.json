@@ -1,0 +1,1598 @@
+[
+    {
+        "datetime": "2026-07-21 15:30:00+09:00",
+        "positions": {
+            "9432.T": {
+                "quantity": 200,
+                "latest_price": 151.8000030517578,
+                "price_datetime": "2026-07-21 15:20:00+09:00"
+            },
+            "4689.T": {
+                "quantity": 200,
+                "latest_price": 447.0,
+                "price_datetime": "2026-07-21 15:20:00+09:00"
+            },
+            "8113.T": {
+                "quantity": 100,
+                "latest_price": 968.4000244140625,
+                "price_datetime": "2026-07-21 15:20:00+09:00"
+            },
+            "3231.T": {
+                "quantity": 100,
+                "latest_price": 962.5,
+                "price_datetime": "2026-07-21 15:20:00+09:00"
+            },
+            "9831.T": {
+                "quantity": 200,
+                "latest_price": 735.0999755859375,
+                "price_datetime": "2026-07-21 15:20:00+09:00"
+            },
+            "8508.T": {
+                "quantity": 100,
+                "latest_price": 854.0,
+                "price_datetime": "2026-07-21 15:20:00+09:00"
+            },
+            "3861.T": {
+                "quantity": 100,
+                "latest_price": 853.2999877929688,
+                "price_datetime": "2026-07-21 15:20:00+09:00"
+            },
+            "6366.T": {
+                "quantity": 100,
+                "latest_price": 691.0,
+                "price_datetime": "2026-07-21 15:20:00+09:00"
+            },
+            "4259.T": {
+                "quantity": 100,
+                "latest_price": 810.0,
+                "price_datetime": "2026-07-21 15:20:00+09:00"
+            },
+            "6958.T": {
+                "quantity": 100,
+                "latest_price": 640.0,
+                "price_datetime": "2026-07-21 15:20:00+09:00"
+            },
+            "7794.T": {
+                "quantity": 100,
+                "latest_price": 929.0,
+                "price_datetime": "2026-07-21 15:20:00+09:00"
+            },
+            "9501.T": {
+                "quantity": 100,
+                "latest_price": 503.79998779296875,
+                "price_datetime": "2026-07-21 15:25:00+09:00"
+            }
+        },
+        "cash": 13740.010070800781,
+        "total_assets": 1001720.0057983398
+    },
+    {
+        "datetime": "2026-07-22 15:30:00+09:00",
+        "positions": {
+            "8729.T": {
+                "quantity": 600,
+                "latest_price": 159.39999389648438,
+                "price_datetime": "2026-07-22 15:20:00+09:00"
+            },
+            "6753.T": {
+                "quantity": 100,
+                "latest_price": 622.7999877929688,
+                "price_datetime": "2026-07-22 15:20:00+09:00"
+            },
+            "8698.T": {
+                "quantity": 100,
+                "latest_price": 759.0,
+                "price_datetime": "2026-07-22 15:20:00+09:00"
+            },
+            "7211.T": {
+                "quantity": 300,
+                "latest_price": 383.79998779296875,
+                "price_datetime": "2026-07-22 15:20:00+09:00"
+            },
+            "6632.T": {
+                "quantity": 300,
+                "latest_price": 1123.0,
+                "price_datetime": "2026-07-22 15:20:00+09:00"
+            },
+            "6768.T": {
+                "quantity": 100,
+                "latest_price": 911.0,
+                "price_datetime": "2026-07-22 15:20:00+09:00"
+            },
+            "8410.T": {
+                "quantity": 200,
+                "latest_price": 314.29998779296875,
+                "price_datetime": "2026-07-22 15:25:00+09:00"
+            },
+            "9008.T": {
+                "quantity": 100,
+                "latest_price": 788.7000122070312,
+                "price_datetime": "2026-07-22 15:20:00+09:00"
+            },
+            "9166.T": {
+                "quantity": 100,
+                "latest_price": 582.0,
+                "price_datetime": "2026-07-22 15:20:00+09:00"
+            }
+        },
+        "cash": 14320.033264160156,
+        "total_assets": 991210.0234985352
+    },
+    {
+        "datetime": "2026-07-23 15:25:00+09:00",
+        "positions": {
+            "3350.T": {
+                "quantity": 100,
+                "latest_price": 241.0,
+                "price_datetime": "2026-07-23 15:20:00+09:00"
+            },
+            "4784.T": {
+                "quantity": 200,
+                "latest_price": 510.0,
+                "price_datetime": "2026-07-23 15:20:00+09:00"
+            },
+            "4259.T": {
+                "quantity": 100,
+                "latest_price": 791.0,
+                "price_datetime": "2026-07-23 15:20:00+09:00"
+            },
+            "7794.T": {
+                "quantity": 100,
+                "latest_price": 956.0,
+                "price_datetime": "2026-07-23 15:20:00+09:00"
+            },
+            "3861.T": {
+                "quantity": 100,
+                "latest_price": 864.9000244140625,
+                "price_datetime": "2026-07-23 15:20:00+09:00"
+            }
+        },
+        "cash": 598780.0262451172,
+        "total_assets": 986070.0286865234
+    },
+    {
+        "datetime": "2026-07-24 15:30:00+09:00",
+        "positions": {
+            "8508.T": {
+                "quantity": 200,
+                "latest_price": 833.0,
+                "price_datetime": "2026-07-24 15:20:00+09:00"
+            },
+            "7984.T": {
+                "quantity": 200,
+                "latest_price": 857.7000122070312,
+                "price_datetime": "2026-07-24 15:20:00+09:00"
+            },
+            "2181.T": {
+                "quantity": 400,
+                "latest_price": 259.3999938964844,
+                "price_datetime": "2026-07-24 15:20:00+09:00"
+            },
+            "7532.T": {
+                "quantity": 400,
+                "latest_price": 860.4000244140625,
+                "price_datetime": "2026-07-24 15:20:00+09:00"
+            },
+            "5074.T": {
+                "quantity": 100,
+                "latest_price": 724.0,
+                "price_datetime": "2026-07-24 15:20:00+09:00"
+            }
+        },
+        "cash": 121610.02044677734,
+        "total_assets": 980070.0302124023
+    },
+    {
+        "datetime": "2026-07-27 15:30:00+09:00",
+        "positions": {
+            "9501.T": {
+                "quantity": 300,
+                "latest_price": 538.5,
+                "price_datetime": "2026-07-27 15:25:00+09:00"
+            },
+            "8572.T": {
+                "quantity": 300,
+                "latest_price": 492.20001220703125,
+                "price_datetime": "2026-07-27 15:20:00+09:00"
+            },
+            "6958.T": {
+                "quantity": 500,
+                "latest_price": 637.0,
+                "price_datetime": "2026-07-27 15:20:00+09:00"
+            },
+            "8622.T": {
+                "quantity": 200,
+                "latest_price": 792.0,
+                "price_datetime": "2026-07-27 15:20:00+09:00"
+            },
+            "9008.T": {
+                "quantity": 100,
+                "latest_price": 804.9000244140625,
+                "price_datetime": "2026-07-27 15:20:00+09:00"
+            },
+            "7201.T": {
+                "quantity": 100,
+                "latest_price": 331.79998779296875,
+                "price_datetime": "2026-07-27 15:20:00+09:00"
+            }
+        },
+        "cash": 95970.02258300781,
+        "total_assets": 995750.0274658203
+    },
+    {
+        "datetime": "2026-07-28 15:25:00+09:00",
+        "positions": {
+            "9434.T": {
+                "quantity": 400,
+                "latest_price": 231.8000030517578,
+                "price_datetime": "2026-07-28 15:20:00+09:00"
+            },
+            "4592.T": {
+                "quantity": 200,
+                "latest_price": 926.0,
+                "price_datetime": "2026-07-28 15:20:00+09:00"
+            },
+            "7746.T": {
+                "quantity": 300,
+                "latest_price": 739.0,
+                "price_datetime": "2026-07-28 15:20:00+09:00"
+            },
+            "8338.T": {
+                "quantity": 100,
+                "latest_price": 662.0,
+                "price_datetime": "2026-07-28 15:20:00+09:00"
+            },
+            "4784.T": {
+                "quantity": 300,
+                "latest_price": 517.0,
+                "price_datetime": "2026-07-28 15:20:00+09:00"
+            },
+            "3387.T": {
+                "quantity": 100,
+                "latest_price": 790.0,
+                "price_datetime": "2026-07-28 15:20:00+09:00"
+            },
+            "8616.T": {
+                "quantity": 200,
+                "latest_price": 797.0,
+                "price_datetime": "2026-07-28 15:20:00+09:00"
+            }
+        },
+        "cash": 21520.00732421875,
+        "total_assets": 980840.0085449219
+    },
+    {
+        "datetime": "2026-07-29 15:30:00+09:00",
+        "positions": {
+            "4689.T": {
+                "quantity": 100,
+                "latest_price": 471.3999938964844,
+                "price_datetime": "2026-07-29 15:20:00+09:00"
+            },
+            "8508.T": {
+                "quantity": 200,
+                "latest_price": 763.0,
+                "price_datetime": "2026-07-29 15:20:00+09:00"
+            },
+            "6958.T": {
+                "quantity": 200,
+                "latest_price": 576.0,
+                "price_datetime": "2026-07-29 15:20:00+09:00"
+            },
+            "8572.T": {
+                "quantity": 300,
+                "latest_price": 494.5,
+                "price_datetime": "2026-07-29 15:20:00+09:00"
+            },
+            "3231.T": {
+                "quantity": 300,
+                "latest_price": 991.0,
+                "price_datetime": "2026-07-29 15:20:00+09:00"
+            },
+            "7794.T": {
+                "quantity": 100,
+                "latest_price": 835.0,
+                "price_datetime": "2026-07-29 15:20:00+09:00"
+            },
+            "7984.T": {
+                "quantity": 100,
+                "latest_price": 904.2000122070312,
+                "price_datetime": "2026-07-29 15:20:00+09:00"
+            }
+        },
+        "cash": 34240.01007080078,
+        "total_assets": 968750.0106811523
+    },
+    {
+        "datetime": "2026-07-30 15:30:00+09:00",
+        "positions": {
+            "6632.T": {
+                "quantity": 300,
+                "latest_price": 1137.0,
+                "price_datetime": "2026-07-30 15:20:00+09:00"
+            },
+            "6366.T": {
+                "quantity": 300,
+                "latest_price": 629.0,
+                "price_datetime": "2026-07-30 15:20:00+09:00"
+            }
+        },
+        "cash": 431350.00762939453,
+        "total_assets": 961150.0076293945
+    },
+    {
+        "datetime": "2026-07-31 15:30:00+09:00",
+        "positions": {
+            "8616.T": {
+                "quantity": 300,
+                "latest_price": 804.0,
+                "price_datetime": "2026-07-31 15:20:00+09:00"
+            },
+            "7211.T": {
+                "quantity": 400,
+                "latest_price": 369.20001220703125,
+                "price_datetime": "2026-07-31 15:20:00+09:00"
+            },
+            "7532.T": {
+                "quantity": 400,
+                "latest_price": 901.4000244140625,
+                "price_datetime": "2026-07-31 15:20:00+09:00"
+            },
+            "4689.T": {
+                "quantity": 300,
+                "latest_price": 445.29998779296875,
+                "price_datetime": "2026-07-31 15:20:00+09:00"
+            }
+        },
+        "cash": 83270.01495361328,
+        "total_assets": 966300.0259399414
+    },
+    {
+        "datetime": "2026-08-03 15:30:00+09:00",
+        "positions": {
+            "8410.T": {
+                "quantity": 100,
+                "latest_price": 317.1000061035156,
+                "price_datetime": "2026-08-03 15:20:00+09:00"
+            },
+            "6472.T": {
+                "quantity": 100,
+                "latest_price": 388.29998779296875,
+                "price_datetime": "2026-08-03 15:20:00+09:00"
+            },
+            "8572.T": {
+                "quantity": 200,
+                "latest_price": 476.3999938964844,
+                "price_datetime": "2026-08-03 15:20:00+09:00"
+            },
+            "7201.T": {
+                "quantity": 200,
+                "latest_price": 327.1000061035156,
+                "price_datetime": "2026-08-03 15:20:00+09:00"
+            },
+            "9432.T": {
+                "quantity": 100,
+                "latest_price": 151.89999389648438,
+                "price_datetime": "2026-08-03 15:25:00+09:00"
+            },
+            "7794.T": {
+                "quantity": 100,
+                "latest_price": 858.0,
+                "price_datetime": "2026-08-03 15:20:00+09:00"
+            },
+            "7746.T": {
+                "quantity": 200,
+                "latest_price": 724.0,
+                "price_datetime": "2026-08-03 15:20:00+09:00"
+            },
+            "4784.T": {
+                "quantity": 100,
+                "latest_price": 571.0,
+                "price_datetime": "2026-08-03 15:20:00+09:00"
+            },
+            "6632.T": {
+                "quantity": 200,
+                "latest_price": 1137.5,
+                "price_datetime": "2026-08-03 15:20:00+09:00"
+            },
+            "4592.T": {
+                "quantity": 100,
+                "latest_price": 919.0,
+                "price_datetime": "2026-08-03 15:20:00+09:00"
+            },
+            "8113.T": {
+                "quantity": 100,
+                "latest_price": 993.2999877929688,
+                "price_datetime": "2026-08-03 15:20:00+09:00"
+            }
+        },
+        "cash": 4460.0128173828125,
+        "total_assets": 957320.0103759766
+    },
+    {
+        "datetime": "2026-08-04 15:30:00+09:00",
+        "positions": {
+            "9434.T": {
+                "quantity": 400,
+                "latest_price": 220.39999389648438,
+                "price_datetime": "2026-08-04 15:20:00+09:00"
+            },
+            "3861.T": {
+                "quantity": 100,
+                "latest_price": 872.5999755859375,
+                "price_datetime": "2026-08-04 15:20:00+09:00"
+            },
+            "5074.T": {
+                "quantity": 100,
+                "latest_price": 735.0,
+                "price_datetime": "2026-08-04 15:20:00+09:00"
+            }
+        },
+        "cash": 687630.0140380859,
+        "total_assets": 936550.0091552734
+    },
+    {
+        "datetime": "2026-08-05 15:25:00+09:00",
+        "positions": {
+            "7984.T": {
+                "quantity": 200,
+                "latest_price": 863.9000244140625,
+                "price_datetime": "2026-08-05 15:20:00+09:00"
+            },
+            "402A.T": {
+                "quantity": 400,
+                "latest_price": 518.0,
+                "price_datetime": "2026-08-05 15:20:00+09:00"
+            },
+            "7746.T": {
+                "quantity": 100,
+                "latest_price": 743.0,
+                "price_datetime": "2026-08-05 15:20:00+09:00"
+            }
+        },
+        "cash": 485670.00579833984,
+        "total_assets": 939950.0106811523
+    },
+    {
+        "datetime": "2026-08-06 15:25:00+09:00",
+        "positions": {
+            "402A.T": {
+                "quantity": 100,
+                "latest_price": 506.0,
+                "price_datetime": "2026-08-06 15:20:00+09:00"
+            },
+            "4784.T": {
+                "quantity": 400,
+                "latest_price": 531.0,
+                "price_datetime": "2026-08-06 15:20:00+09:00"
+            },
+            "3697.T": {
+                "quantity": 200,
+                "latest_price": 825.0,
+                "price_datetime": "2026-08-06 15:20:00+09:00"
+            },
+            "6366.T": {
+                "quantity": 100,
+                "latest_price": 695.0,
+                "price_datetime": "2026-08-06 15:20:00+09:00"
+            },
+            "6753.T": {
+                "quantity": 100,
+                "latest_price": 631.7999877929688,
+                "price_datetime": "2026-08-06 15:20:00+09:00"
+            },
+            "9519.T": {
+                "quantity": 100,
+                "latest_price": 929.0,
+                "price_datetime": "2026-08-06 15:20:00+09:00"
+            },
+            "6958.T": {
+                "quantity": 100,
+                "latest_price": 711.0,
+                "price_datetime": "2026-08-06 15:20:00+09:00"
+            }
+        },
+        "cash": 216200.01373291016,
+        "total_assets": 940880.012512207
+    },
+    {
+        "datetime": "2026-08-07 15:25:00+09:00",
+        "positions": {
+            "8572.T": {
+                "quantity": 100,
+                "latest_price": 483.1000061035156,
+                "price_datetime": "2026-08-07 15:20:00+09:00"
+            },
+            "8508.T": {
+                "quantity": 300,
+                "latest_price": 883.0,
+                "price_datetime": "2026-08-07 15:20:00+09:00"
+            },
+            "8113.T": {
+                "quantity": 400,
+                "latest_price": 1018.0,
+                "price_datetime": "2026-08-07 15:20:00+09:00"
+            }
+        },
+        "cash": 222890.00701904297,
+        "total_assets": 943300.0076293945
+    },
+    {
+        "datetime": "2026-08-10 15:30:00+09:00",
+        "positions": {
+            "9501.T": {
+                "quantity": 300,
+                "latest_price": 522.0999755859375,
+                "price_datetime": "2026-08-10 15:20:00+09:00"
+            },
+            "3231.T": {
+                "quantity": 300,
+                "latest_price": 906.2999877929688,
+                "price_datetime": "2026-08-10 15:20:00+09:00"
+            },
+            "4902.T": {
+                "quantity": 100,
+                "latest_price": 655.0,
+                "price_datetime": "2026-08-10 15:20:00+09:00"
+            },
+            "7532.T": {
+                "quantity": 200,
+                "latest_price": 927.4000244140625,
+                "price_datetime": "2026-08-10 15:20:00+09:00"
+            },
+            "2492.T": {
+                "quantity": 100,
+                "latest_price": 561.0,
+                "price_datetime": "2026-08-10 15:20:00+09:00"
+            }
+        },
+        "cash": 204949.99389648438,
+        "total_assets": 940549.9877929688
+    },
+    {
+        "datetime": "2026-08-12 15:30:00+09:00",
+        "positions": {
+            "9501.T": {
+                "quantity": 400,
+                "latest_price": 517.0,
+                "price_datetime": "2026-08-12 15:20:00+09:00"
+            },
+            "2181.T": {
+                "quantity": 200,
+                "latest_price": 285.29998779296875,
+                "price_datetime": "2026-08-12 15:20:00+09:00"
+            },
+            "6768.T": {
+                "quantity": 100,
+                "latest_price": 778.0,
+                "price_datetime": "2026-08-12 15:20:00+09:00"
+            },
+            "4784.T": {
+                "quantity": 100,
+                "latest_price": 560.0,
+                "price_datetime": "2026-08-12 15:20:00+09:00"
+            },
+            "8622.T": {
+                "quantity": 200,
+                "latest_price": 848.0,
+                "price_datetime": "2026-08-12 15:20:00+09:00"
+            },
+            "402A.T": {
+                "quantity": 100,
+                "latest_price": 539.0,
+                "price_datetime": "2026-08-12 15:20:00+09:00"
+            },
+            "5074.T": {
+                "quantity": 100,
+                "latest_price": 771.0,
+                "price_datetime": "2026-08-12 15:20:00+09:00"
+            }
+        },
+        "cash": 243999.9969482422,
+        "total_assets": 942259.9945068359
+    },
+    {
+        "datetime": "2026-08-13 15:25:00+09:00",
+        "positions": {
+            "9501.T": {
+                "quantity": 100,
+                "latest_price": 520.2000122070312,
+                "price_datetime": "2026-08-13 15:20:00+09:00"
+            },
+            "2181.T": {
+                "quantity": 200,
+                "latest_price": 281.70001220703125,
+                "price_datetime": "2026-08-13 15:20:00+09:00"
+            },
+            "7532.T": {
+                "quantity": 100,
+                "latest_price": 924.2999877929688,
+                "price_datetime": "2026-08-13 15:20:00+09:00"
+            },
+            "8729.T": {
+                "quantity": 300,
+                "latest_price": 154.0,
+                "price_datetime": "2026-08-13 15:20:00+09:00"
+            },
+            "3861.T": {
+                "quantity": 100,
+                "latest_price": 871.2000122070312,
+                "price_datetime": "2026-08-13 15:20:00+09:00"
+            },
+            "7984.T": {
+                "quantity": 400,
+                "latest_price": 871.0,
+                "price_datetime": "2026-08-13 15:20:00+09:00"
+            },
+            "6366.T": {
+                "quantity": 300,
+                "latest_price": 720.0,
+                "price_datetime": "2026-08-13 15:20:00+09:00"
+            }
+        },
+        "cash": 52959.99755859375,
+        "total_assets": 951470.0012207031
+    },
+    {
+        "datetime": "2026-08-14 15:30:00+09:00",
+        "positions": {
+            "8508.T": {
+                "quantity": 400,
+                "latest_price": 896.0,
+                "price_datetime": "2026-08-14 15:20:00+09:00"
+            },
+            "6472.T": {
+                "quantity": 100,
+                "latest_price": 390.1000061035156,
+                "price_datetime": "2026-08-14 15:20:00+09:00"
+            },
+            "4755.T": {
+                "quantity": 100,
+                "latest_price": 765.0999755859375,
+                "price_datetime": "2026-08-14 15:25:00+09:00"
+            },
+            "9831.T": {
+                "quantity": 200,
+                "latest_price": 693.2999877929688,
+                "price_datetime": "2026-08-14 15:20:00+09:00"
+            },
+            "4592.T": {
+                "quantity": 100,
+                "latest_price": 1040.0,
+                "price_datetime": "2026-08-14 15:20:00+09:00"
+            },
+            "8698.T": {
+                "quantity": 100,
+                "latest_price": 689.0,
+                "price_datetime": "2026-08-14 15:20:00+09:00"
+            },
+            "3673.T": {
+                "quantity": 100,
+                "latest_price": 431.0,
+                "price_datetime": "2026-08-14 15:20:00+09:00"
+            },
+            "6632.T": {
+                "quantity": 100,
+                "latest_price": 1038.0,
+                "price_datetime": "2026-08-14 15:20:00+09:00"
+            }
+        },
+        "cash": 29139.99481201172,
+        "total_assets": 961519.9905395508
+    },
+    {
+        "datetime": "2026-08-17 15:25:00+09:00",
+        "positions": {
+            "3673.T": {
+                "quantity": 100,
+                "latest_price": 436.0,
+                "price_datetime": "2026-08-17 15:20:00+09:00"
+            },
+            "8729.T": {
+                "quantity": 200,
+                "latest_price": 155.5,
+                "price_datetime": "2026-08-17 15:20:00+09:00"
+            },
+            "7211.T": {
+                "quantity": 400,
+                "latest_price": 347.70001220703125,
+                "price_datetime": "2026-08-17 15:20:00+09:00"
+            },
+            "6366.T": {
+                "quantity": 100,
+                "latest_price": 721.0,
+                "price_datetime": "2026-08-17 15:20:00+09:00"
+            },
+            "6958.T": {
+                "quantity": 100,
+                "latest_price": 781.0,
+                "price_datetime": "2026-08-17 15:20:00+09:00"
+            },
+            "7201.T": {
+                "quantity": 200,
+                "latest_price": 330.5,
+                "price_datetime": "2026-08-17 15:20:00+09:00"
+            },
+            "8113.T": {
+                "quantity": 100,
+                "latest_price": 970.5999755859375,
+                "price_datetime": "2026-08-17 15:20:00+09:00"
+            },
+            "5401.T": {
+                "quantity": 100,
+                "latest_price": 670.9000244140625,
+                "price_datetime": "2026-08-17 15:20:00+09:00"
+            },
+            "3350.T": {
+                "quantity": 200,
+                "latest_price": 219.0,
+                "price_datetime": "2026-08-17 15:20:00+09:00"
+            },
+            "8622.T": {
+                "quantity": 100,
+                "latest_price": 860.0,
+                "price_datetime": "2026-08-17 15:20:00+09:00"
+            }
+        },
+        "cash": 231960.00061035156,
+        "total_assets": 955990.0054931641
+    },
+    {
+        "datetime": "2026-08-18 15:25:00+09:00",
+        "positions": {
+            "6632.T": {
+                "quantity": 300,
+                "latest_price": 1011.0,
+                "price_datetime": "2026-08-18 15:20:00+09:00"
+            },
+            "8572.T": {
+                "quantity": 100,
+                "latest_price": 480.0,
+                "price_datetime": "2026-08-18 15:20:00+09:00"
+            },
+            "9519.T": {
+                "quantity": 100,
+                "latest_price": 964.0,
+                "price_datetime": "2026-08-18 15:20:00+09:00"
+            },
+            "402A.T": {
+                "quantity": 100,
+                "latest_price": 534.0,
+                "price_datetime": "2026-08-18 15:20:00+09:00"
+            }
+        },
+        "cash": 458430.0003051758,
+        "total_assets": 959530.0003051758
+    },
+    {
+        "datetime": "2026-08-19 15:30:00+09:00",
+        "positions": {
+            "8729.T": {
+                "quantity": 100,
+                "latest_price": 154.39999389648438,
+                "price_datetime": "2026-08-19 15:20:00+09:00"
+            },
+            "5707.T": {
+                "quantity": 100,
+                "latest_price": 1054.0,
+                "price_datetime": "2026-08-19 15:20:00+09:00"
+            },
+            "4902.T": {
+                "quantity": 200,
+                "latest_price": 625.0999755859375,
+                "price_datetime": "2026-08-19 15:20:00+09:00"
+            }
+        },
+        "cash": 699730.0018310547,
+        "total_assets": 945589.9963378906
+    },
+    {
+        "datetime": "2026-08-20 15:30:00+09:00",
+        "positions": {
+            "9432.T": {
+                "quantity": 500,
+                "latest_price": 160.89999389648438,
+                "price_datetime": "2026-08-20 15:20:00+09:00"
+            },
+            "3387.T": {
+                "quantity": 100,
+                "latest_price": 775.0,
+                "price_datetime": "2026-08-20 15:20:00+09:00"
+            },
+            "5074.T": {
+                "quantity": 100,
+                "latest_price": 632.0,
+                "price_datetime": "2026-08-20 15:20:00+09:00"
+            },
+            "4005.T": {
+                "quantity": 200,
+                "latest_price": 522.5,
+                "price_datetime": "2026-08-20 15:20:00+09:00"
+            },
+            "7211.T": {
+                "quantity": 100,
+                "latest_price": 353.1000061035156,
+                "price_datetime": "2026-08-20 15:20:00+09:00"
+            },
+            "4755.T": {
+                "quantity": 100,
+                "latest_price": 782.7000122070312,
+                "price_datetime": "2026-08-20 15:20:00+09:00"
+            },
+            "9519.T": {
+                "quantity": 100,
+                "latest_price": 920.0,
+                "price_datetime": "2026-08-20 15:20:00+09:00"
+            },
+            "6966.T": {
+                "quantity": 200,
+                "latest_price": 923.0,
+                "price_datetime": "2026-08-20 15:20:00+09:00"
+            },
+            "8338.T": {
+                "quantity": 100,
+                "latest_price": 707.0,
+                "price_datetime": "2026-08-20 15:20:00+09:00"
+            },
+            "6753.T": {
+                "quantity": 100,
+                "latest_price": 634.4000244140625,
+                "price_datetime": "2026-08-20 15:20:00+09:00"
+            }
+        },
+        "cash": 121610.00366210938,
+        "total_assets": 971580.0048828125
+    },
+    {
+        "datetime": "2026-08-21 15:30:00+09:00",
+        "positions": {
+            "6632.T": {
+                "quantity": 200,
+                "latest_price": 1004.5,
+                "price_datetime": "2026-08-21 15:20:00+09:00"
+            },
+            "7532.T": {
+                "quantity": 400,
+                "latest_price": 821.4000244140625,
+                "price_datetime": "2026-08-21 15:20:00+09:00"
+            },
+            "4902.T": {
+                "quantity": 100,
+                "latest_price": 646.9000244140625,
+                "price_datetime": "2026-08-21 15:20:00+09:00"
+            },
+            "4689.T": {
+                "quantity": 100,
+                "latest_price": 524.2999877929688,
+                "price_datetime": "2026-08-21 15:25:00+09:00"
+            }
+        },
+        "cash": 329700.01525878906,
+        "total_assets": 976280.0262451172
+    },
+    {
+        "datetime": "2026-08-24 15:25:00+09:00",
+        "positions": {
+            "2181.T": {
+                "quantity": 100,
+                "latest_price": 292.8999938964844,
+                "price_datetime": "2026-08-24 15:20:00+09:00"
+            },
+            "402A.T": {
+                "quantity": 100,
+                "latest_price": 506.0,
+                "price_datetime": "2026-08-24 15:20:00+09:00"
+            },
+            "5074.T": {
+                "quantity": 100,
+                "latest_price": 619.0,
+                "price_datetime": "2026-08-24 15:20:00+09:00"
+            },
+            "8572.T": {
+                "quantity": 500,
+                "latest_price": 489.5,
+                "price_datetime": "2026-08-24 15:20:00+09:00"
+            },
+            "9831.T": {
+                "quantity": 100,
+                "latest_price": 702.4000244140625,
+                "price_datetime": "2026-08-24 15:20:00+09:00"
+            },
+            "8698.T": {
+                "quantity": 100,
+                "latest_price": 727.0,
+                "price_datetime": "2026-08-24 15:20:00+09:00"
+            },
+            "7794.T": {
+                "quantity": 100,
+                "latest_price": 913.0,
+                "price_datetime": "2026-08-24 15:20:00+09:00"
+            }
+        },
+        "cash": 348070.0225830078,
+        "total_assets": 968850.0244140625
+    },
+    {
+        "datetime": "2026-08-25 15:30:00+09:00",
+        "positions": {
+            "2492.T": {
+                "quantity": 100,
+                "latest_price": 601.0,
+                "price_datetime": "2026-08-25 15:20:00+09:00"
+            },
+            "7201.T": {
+                "quantity": 300,
+                "latest_price": 324.8999938964844,
+                "price_datetime": "2026-08-25 15:20:00+09:00"
+            },
+            "8616.T": {
+                "quantity": 400,
+                "latest_price": 866.0,
+                "price_datetime": "2026-08-25 15:20:00+09:00"
+            },
+            "4592.T": {
+                "quantity": 200,
+                "latest_price": 1017.0,
+                "price_datetime": "2026-08-25 15:20:00+09:00"
+            },
+            "3231.T": {
+                "quantity": 100,
+                "latest_price": 938.4000244140625,
+                "price_datetime": "2026-08-25 15:20:00+09:00"
+            }
+        },
+        "cash": 167020.01495361328,
+        "total_assets": 968230.0155639648
+    },
+    {
+        "datetime": "2026-08-26 15:30:00+09:00",
+        "positions": {
+            "4902.T": {
+                "quantity": 200,
+                "latest_price": 663.5,
+                "price_datetime": "2026-08-26 15:20:00+09:00"
+            },
+            "7794.T": {
+                "quantity": 100,
+                "latest_price": 1045.0,
+                "price_datetime": "2026-08-26 15:20:00+09:00"
+            },
+            "4259.T": {
+                "quantity": 100,
+                "latest_price": 751.0,
+                "price_datetime": "2026-08-26 15:20:00+09:00"
+            },
+            "4755.T": {
+                "quantity": 300,
+                "latest_price": 774.5,
+                "price_datetime": "2026-08-26 15:20:00+09:00"
+            },
+            "5707.T": {
+                "quantity": 100,
+                "latest_price": 1224.0,
+                "price_datetime": "2026-08-26 15:20:00+09:00"
+            },
+            "7532.T": {
+                "quantity": 300,
+                "latest_price": 821.0999755859375,
+                "price_datetime": "2026-08-26 15:20:00+09:00"
+            }
+        },
+        "cash": 57530.02166748047,
+        "total_assets": 970910.0143432617
+    },
+    {
+        "datetime": "2026-08-27 15:30:00+09:00",
+        "positions": {
+            "3350.T": {
+                "quantity": 100,
+                "latest_price": 304.0,
+                "price_datetime": "2026-08-27 15:20:00+09:00"
+            },
+            "4689.T": {
+                "quantity": 200,
+                "latest_price": 549.7000122070312,
+                "price_datetime": "2026-08-27 15:20:00+09:00"
+            },
+            "6366.T": {
+                "quantity": 200,
+                "latest_price": 724.0,
+                "price_datetime": "2026-08-27 15:20:00+09:00"
+            },
+            "8698.T": {
+                "quantity": 100,
+                "latest_price": 746.0,
+                "price_datetime": "2026-08-27 15:20:00+09:00"
+            },
+            "7211.T": {
+                "quantity": 200,
+                "latest_price": 375.0,
+                "price_datetime": "2026-08-27 15:20:00+09:00"
+            },
+            "6966.T": {
+                "quantity": 200,
+                "latest_price": 938.0,
+                "price_datetime": "2026-08-27 15:20:00+09:00"
+            },
+            "7746.T": {
+                "quantity": 100,
+                "latest_price": 770.0,
+                "price_datetime": "2026-08-27 15:20:00+09:00"
+            },
+            "402A.T": {
+                "quantity": 100,
+                "latest_price": 526.0,
+                "price_datetime": "2026-08-27 15:20:00+09:00"
+            },
+            "3861.T": {
+                "quantity": 100,
+                "latest_price": 876.5,
+                "price_datetime": "2026-08-27 15:20:00+09:00"
+            }
+        },
+        "cash": 126090.00244140625,
+        "total_assets": 965680.0048828125
+    },
+    {
+        "datetime": "2026-08-28 15:30:00+09:00",
+        "positions": {
+            "7201.T": {
+                "quantity": 200,
+                "latest_price": 321.0,
+                "price_datetime": "2026-08-28 15:20:00+09:00"
+            },
+            "6958.T": {
+                "quantity": 100,
+                "latest_price": 762.0,
+                "price_datetime": "2026-08-28 15:20:00+09:00"
+            },
+            "2492.T": {
+                "quantity": 100,
+                "latest_price": 684.0,
+                "price_datetime": "2026-08-28 15:20:00+09:00"
+            },
+            "4784.T": {
+                "quantity": 200,
+                "latest_price": 584.0,
+                "price_datetime": "2026-08-28 15:20:00+09:00"
+            }
+        },
+        "cash": 656800.0,
+        "total_assets": 982400.0
+    },
+    {
+        "datetime": "2026-08-31 15:25:00+09:00",
+        "positions": {
+            "2127.T": {
+                "quantity": 300,
+                "latest_price": 685.2999877929688,
+                "price_datetime": "2026-08-31 15:20:00+09:00"
+            },
+            "9501.T": {
+                "quantity": 300,
+                "latest_price": 536.2999877929688,
+                "price_datetime": "2026-08-31 15:20:00+09:00"
+            },
+            "3387.T": {
+                "quantity": 100,
+                "latest_price": 753.0,
+                "price_datetime": "2026-08-31 15:20:00+09:00"
+            },
+            "9519.T": {
+                "quantity": 100,
+                "latest_price": 915.0,
+                "price_datetime": "2026-08-31 15:20:00+09:00"
+            },
+            "7794.T": {
+                "quantity": 100,
+                "latest_price": 988.0,
+                "price_datetime": "2026-08-31 15:20:00+09:00"
+            }
+        },
+        "cash": 344050.0061035156,
+        "total_assets": 976129.9987792969
+    },
+    {
+        "datetime": "2026-09-01 15:25:00+09:00",
+        "positions": {
+            "7532.T": {
+                "quantity": 200,
+                "latest_price": 773.0,
+                "price_datetime": "2026-09-01 15:20:00+09:00"
+            },
+            "6958.T": {
+                "quantity": 200,
+                "latest_price": 791.0,
+                "price_datetime": "2026-09-01 15:20:00+09:00"
+            },
+            "8338.T": {
+                "quantity": 500,
+                "latest_price": 748.0,
+                "price_datetime": "2026-09-01 15:20:00+09:00"
+            },
+            "4592.T": {
+                "quantity": 100,
+                "latest_price": 950.0,
+                "price_datetime": "2026-09-01 15:20:00+09:00"
+            },
+            "5401.T": {
+                "quantity": 200,
+                "latest_price": 698.7000122070312,
+                "price_datetime": "2026-09-01 15:20:00+09:00"
+            }
+        },
+        "cash": 62970.01495361328,
+        "total_assets": 984510.0173950195
+    },
+    {
+        "datetime": "2026-09-02 15:25:00+09:00",
+        "positions": {
+            "6472.T": {
+                "quantity": 700,
+                "latest_price": 374.1000061035156,
+                "price_datetime": "2026-09-02 15:20:00+09:00"
+            },
+            "3231.T": {
+                "quantity": 200,
+                "latest_price": 931.5,
+                "price_datetime": "2026-09-02 15:20:00+09:00"
+            },
+            "9166.T": {
+                "quantity": 100,
+                "latest_price": 691.0,
+                "price_datetime": "2026-09-02 15:20:00+09:00"
+            },
+            "3697.T": {
+                "quantity": 200,
+                "latest_price": 885.0,
+                "price_datetime": "2026-09-02 15:20:00+09:00"
+            }
+        },
+        "cash": 270600.0015258789,
+        "total_assets": 964870.0057983398
+    },
+    {
+        "datetime": "2026-09-03 15:30:00+09:00",
+        "positions": {
+            "6768.T": {
+                "quantity": 200,
+                "latest_price": 776.0,
+                "price_datetime": "2026-09-03 15:20:00+09:00"
+            },
+            "7746.T": {
+                "quantity": 100,
+                "latest_price": 782.0,
+                "price_datetime": "2026-09-03 15:20:00+09:00"
+            },
+            "5707.T": {
+                "quantity": 100,
+                "latest_price": 1064.0,
+                "price_datetime": "2026-09-03 15:20:00+09:00"
+            },
+            "6966.T": {
+                "quantity": 100,
+                "latest_price": 920.0,
+                "price_datetime": "2026-09-03 15:20:00+09:00"
+            },
+            "8622.T": {
+                "quantity": 100,
+                "latest_price": 950.0,
+                "price_datetime": "2026-09-03 15:20:00+09:00"
+            },
+            "9008.T": {
+                "quantity": 100,
+                "latest_price": 780.5,
+                "price_datetime": "2026-09-03 15:20:00+09:00"
+            },
+            "9519.T": {
+                "quantity": 100,
+                "latest_price": 876.0,
+                "price_datetime": "2026-09-03 15:20:00+09:00"
+            },
+            "6632.T": {
+                "quantity": 100,
+                "latest_price": 1019.0,
+                "price_datetime": "2026-09-03 15:20:00+09:00"
+            },
+            "4592.T": {
+                "quantity": 100,
+                "latest_price": 915.0,
+                "price_datetime": "2026-09-03 15:20:00+09:00"
+            }
+        },
+        "cash": 74170.00732421875,
+        "total_assets": 960020.0073242188
+    },
+    {
+        "datetime": "2026-09-04 15:30:00+09:00",
+        "positions": {
+            "7211.T": {
+                "quantity": 100,
+                "latest_price": 369.20001220703125,
+                "price_datetime": "2026-09-04 15:20:00+09:00"
+            },
+            "9166.T": {
+                "quantity": 200,
+                "latest_price": 734.0,
+                "price_datetime": "2026-09-04 15:20:00+09:00"
+            },
+            "9432.T": {
+                "quantity": 300,
+                "latest_price": 172.5,
+                "price_datetime": "2026-09-04 15:20:00+09:00"
+            },
+            "4005.T": {
+                "quantity": 300,
+                "latest_price": 595.9000244140625,
+                "price_datetime": "2026-09-04 15:20:00+09:00"
+            },
+            "7532.T": {
+                "quantity": 100,
+                "latest_price": 778.5,
+                "price_datetime": "2026-09-04 15:20:00+09:00"
+            }
+        },
+        "cash": 467680.01708984375,
+        "total_assets": 959770.0256347656
+    },
+    {
+        "datetime": "2026-09-07 15:25:00+09:00",
+        "positions": {
+            "4005.T": {
+                "quantity": 100,
+                "latest_price": 589.7999877929688,
+                "price_datetime": "2026-09-07 15:20:00+09:00"
+            },
+            "2127.T": {
+                "quantity": 100,
+                "latest_price": 652.7999877929688,
+                "price_datetime": "2026-09-07 15:20:00+09:00"
+            },
+            "3861.T": {
+                "quantity": 200,
+                "latest_price": 872.2999877929688,
+                "price_datetime": "2026-09-07 15:20:00+09:00"
+            },
+            "7201.T": {
+                "quantity": 200,
+                "latest_price": 317.0,
+                "price_datetime": "2026-09-07 15:20:00+09:00"
+            },
+            "6768.T": {
+                "quantity": 200,
+                "latest_price": 793.0,
+                "price_datetime": "2026-09-07 15:20:00+09:00"
+            },
+            "9008.T": {
+                "quantity": 200,
+                "latest_price": 770.7000122070312,
+                "price_datetime": "2026-09-07 15:20:00+09:00"
+            }
+        },
+        "cash": 282709.99908447266,
+        "total_assets": 957569.9966430664
+    },
+    {
+        "datetime": "2026-09-08 15:30:00+09:00",
+        "positions": {
+            "8572.T": {
+                "quantity": 100,
+                "latest_price": 484.20001220703125,
+                "price_datetime": "2026-09-08 15:20:00+09:00"
+            },
+            "3231.T": {
+                "quantity": 300,
+                "latest_price": 915.4000244140625,
+                "price_datetime": "2026-09-08 15:20:00+09:00"
+            },
+            "9831.T": {
+                "quantity": 100,
+                "latest_price": 694.7000122070312,
+                "price_datetime": "2026-09-08 15:20:00+09:00"
+            },
+            "7794.T": {
+                "quantity": 100,
+                "latest_price": 1040.0,
+                "price_datetime": "2026-09-08 15:20:00+09:00"
+            },
+            "2492.T": {
+                "quantity": 300,
+                "latest_price": 706.0,
+                "price_datetime": "2026-09-08 15:20:00+09:00"
+            },
+            "5707.T": {
+                "quantity": 100,
+                "latest_price": 1000.0,
+                "price_datetime": "2026-09-08 15:20:00+09:00"
+            }
+        },
+        "cash": 133839.99938964844,
+        "total_assets": 942150.0091552734
+    },
+    {
+        "datetime": "2026-09-09 15:30:00+09:00",
+        "positions": {
+            "9432.T": {
+                "quantity": 200,
+                "latest_price": 171.6999969482422,
+                "price_datetime": "2026-09-09 15:25:00+09:00"
+            },
+            "9434.T": {
+                "quantity": 100,
+                "latest_price": 239.6999969482422,
+                "price_datetime": "2026-09-09 15:20:00+09:00"
+            },
+            "3350.T": {
+                "quantity": 300,
+                "latest_price": 251.0,
+                "price_datetime": "2026-09-09 15:20:00+09:00"
+            },
+            "7532.T": {
+                "quantity": 200,
+                "latest_price": 757.2000122070312,
+                "price_datetime": "2026-09-09 15:20:00+09:00"
+            },
+            "402A.T": {
+                "quantity": 200,
+                "latest_price": 540.0,
+                "price_datetime": "2026-09-09 15:20:00+09:00"
+            },
+            "3697.T": {
+                "quantity": 100,
+                "latest_price": 832.7999877929688,
+                "price_datetime": "2026-09-09 15:20:00+09:00"
+            },
+            "8113.T": {
+                "quantity": 100,
+                "latest_price": 948.5,
+                "price_datetime": "2026-09-09 15:20:00+09:00"
+            }
+        },
+        "cash": 370549.9954223633,
+        "total_assets": 941729.9957275391
+    },
+    {
+        "datetime": "2026-09-10 15:25:00+09:00",
+        "positions": {
+            "7984.T": {
+                "quantity": 200,
+                "latest_price": 909.5,
+                "price_datetime": "2026-09-10 15:20:00+09:00"
+            },
+            "9501.T": {
+                "quantity": 200,
+                "latest_price": 549.7000122070312,
+                "price_datetime": "2026-09-10 15:20:00+09:00"
+            },
+            "3861.T": {
+                "quantity": 100,
+                "latest_price": 857.2999877929688,
+                "price_datetime": "2026-09-10 15:20:00+09:00"
+            },
+            "9831.T": {
+                "quantity": 200,
+                "latest_price": 715.0,
+                "price_datetime": "2026-09-10 15:20:00+09:00"
+            },
+            "6966.T": {
+                "quantity": 100,
+                "latest_price": 938.0,
+                "price_datetime": "2026-09-10 15:20:00+09:00"
+            },
+            "9519.T": {
+                "quantity": 100,
+                "latest_price": 911.0,
+                "price_datetime": "2026-09-10 15:20:00+09:00"
+            }
+        },
+        "cash": 235689.99938964844,
+        "total_assets": 941160.0006103516
+    },
+    {
+        "datetime": "2026-09-11 15:25:00+09:00",
+        "positions": {
+            "7532.T": {
+                "quantity": 400,
+                "latest_price": 722.7000122070312,
+                "price_datetime": "2026-09-11 15:20:00+09:00"
+            },
+            "4902.T": {
+                "quantity": 400,
+                "latest_price": 596.5,
+                "price_datetime": "2026-09-11 15:20:00+09:00"
+            }
+        },
+        "cash": 409859.9838256836,
+        "total_assets": 937539.9887084961
+    },
+    {
+        "datetime": "2026-09-14 15:30:00+09:00",
+        "positions": {
+            "3350.T": {
+                "quantity": 500,
+                "latest_price": 248.0,
+                "price_datetime": "2026-09-14 15:20:00+09:00"
+            },
+            "4592.T": {
+                "quantity": 300,
+                "latest_price": 951.0,
+                "price_datetime": "2026-09-14 15:20:00+09:00"
+            },
+            "7746.T": {
+                "quantity": 200,
+                "latest_price": 794.0,
+                "price_datetime": "2026-09-14 15:20:00+09:00"
+            },
+            "8698.T": {
+                "quantity": 100,
+                "latest_price": 721.0,
+                "price_datetime": "2026-09-14 15:20:00+09:00"
+            },
+            "8508.T": {
+                "quantity": 100,
+                "latest_price": 756.0,
+                "price_datetime": "2026-09-14 15:20:00+09:00"
+            },
+            "8616.T": {
+                "quantity": 100,
+                "latest_price": 893.0,
+                "price_datetime": "2026-09-14 15:20:00+09:00"
+            },
+            "6366.T": {
+                "quantity": 100,
+                "latest_price": 689.0,
+                "price_datetime": "2026-09-14 15:20:00+09:00"
+            }
+        },
+        "cash": 85599.98779296875,
+        "total_assets": 959599.9877929688
+    },
+    {
+        "datetime": "2026-09-15 15:30:00+09:00",
+        "positions": {
+            "9434.T": {
+                "quantity": 100,
+                "latest_price": 251.39999389648438,
+                "price_datetime": "2026-09-15 15:20:00+09:00"
+            },
+            "2181.T": {
+                "quantity": 100,
+                "latest_price": 293.3999938964844,
+                "price_datetime": "2026-09-15 15:20:00+09:00"
+            },
+            "3697.T": {
+                "quantity": 200,
+                "latest_price": 875.2000122070312,
+                "price_datetime": "2026-09-15 15:20:00+09:00"
+            },
+            "6966.T": {
+                "quantity": 100,
+                "latest_price": 858.0,
+                "price_datetime": "2026-09-15 15:20:00+09:00"
+            },
+            "3861.T": {
+                "quantity": 100,
+                "latest_price": 869.0999755859375,
+                "price_datetime": "2026-09-15 15:20:00+09:00"
+            },
+            "4259.T": {
+                "quantity": 100,
+                "latest_price": 884.0,
+                "price_datetime": "2026-09-15 15:20:00+09:00"
+            },
+            "4902.T": {
+                "quantity": 200,
+                "latest_price": 623.5,
+                "price_datetime": "2026-09-15 15:20:00+09:00"
+            },
+            "9008.T": {
+                "quantity": 100,
+                "latest_price": 804.4000244140625,
+                "price_datetime": "2026-09-15 15:20:00+09:00"
+            }
+        },
+        "cash": 256519.9935913086,
+        "total_assets": 952289.9948120117
+    },
+    {
+        "datetime": "2026-09-16 15:30:00+09:00",
+        "positions": {
+            "4755.T": {
+                "quantity": 400,
+                "latest_price": 716.4000244140625,
+                "price_datetime": "2026-09-16 15:20:00+09:00"
+            },
+            "543A.T": {
+                "quantity": 200,
+                "latest_price": 273.0,
+                "price_datetime": "2026-09-16 15:25:00+09:00"
+            },
+            "402A.T": {
+                "quantity": 100,
+                "latest_price": 520.0,
+                "price_datetime": "2026-09-16 15:20:00+09:00"
+            },
+            "9831.T": {
+                "quantity": 300,
+                "latest_price": 718.4000244140625,
+                "price_datetime": "2026-09-16 15:20:00+09:00"
+            },
+            "8338.T": {
+                "quantity": 200,
+                "latest_price": 750.0,
+                "price_datetime": "2026-09-16 15:20:00+09:00"
+            },
+            "6632.T": {
+                "quantity": 100,
+                "latest_price": 997.4000244140625,
+                "price_datetime": "2026-09-16 15:20:00+09:00"
+            }
+        },
+        "cash": 90079.98809814453,
+        "total_assets": 948500.0076293945
+    },
+    {
+        "datetime": "2026-09-17 15:30:00+09:00",
+        "positions": {
+            "8410.T": {
+                "quantity": 200,
+                "latest_price": 344.6000061035156,
+                "price_datetime": "2026-09-17 15:20:00+09:00"
+            },
+            "7984.T": {
+                "quantity": 100,
+                "latest_price": 904.9000244140625,
+                "price_datetime": "2026-09-17 15:20:00+09:00"
+            },
+            "8572.T": {
+                "quantity": 100,
+                "latest_price": 492.6000061035156,
+                "price_datetime": "2026-09-17 15:20:00+09:00"
+            },
+            "6958.T": {
+                "quantity": 100,
+                "latest_price": 775.0,
+                "price_datetime": "2026-09-17 15:20:00+09:00"
+            },
+            "4005.T": {
+                "quantity": 300,
+                "latest_price": 596.7999877929688,
+                "price_datetime": "2026-09-17 15:20:00+09:00"
+            }
+        },
+        "cash": 499939.97955322266,
+        "total_assets": 965149.9801635742
+    },
+    {
+        "datetime": "2026-09-18 15:30:00+09:00",
+        "positions": {
+            "7201.T": {
+                "quantity": 100,
+                "latest_price": 313.1000061035156,
+                "price_datetime": "2026-09-18 15:20:00+09:00"
+            },
+            "7794.T": {
+                "quantity": 400,
+                "latest_price": 996.0,
+                "price_datetime": "2026-09-18 15:20:00+09:00"
+            },
+            "4784.T": {
+                "quantity": 200,
+                "latest_price": 531.0,
+                "price_datetime": "2026-09-18 15:20:00+09:00"
+            },
+            "3673.T": {
+                "quantity": 200,
+                "latest_price": 489.0,
+                "price_datetime": "2026-09-18 15:20:00+09:00"
+            },
+            "2127.T": {
+                "quantity": 300,
+                "latest_price": 655.9000244140625,
+                "price_datetime": "2026-09-18 15:20:00+09:00"
+            }
+        },
+        "cash": 121409.97314453125,
+        "total_assets": 951889.9810791016
+    }
+]
