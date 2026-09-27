@@ -3,6 +3,34 @@ import yfinance as yf
 from pathlib import Path
 import json
 
+def get_save_latest_stock_data(code: str) -> dict:
+    path = Path("data") / f"{code}_5m.csv"
+    df = yf.Ticker(code).history(
+        period="1d", interval="5m", auto_adjust=False
+    )
+    if df.empty:
+        raise ValueError(f"{code} の株価を取得できませんでした")
+
+    latest = df[["Open", "High", "Low", "Close", "Volume"]].tail(1)
+    result = {"Datetime": latest.index[0], **latest.iloc[0].to_dict()}
+    has_data = path.exists() and path.stat().st_size > 0
+
+    if has_data:
+        saved = pd.read_csv(path, usecols=["Datetime"])
+        saved_times = pd.to_datetime(saved["Datetime"], utc=True)
+        latest_time = pd.to_datetime(latest.index[0], utc=True)
+        if latest_time in saved_times.values:
+            return result
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    latest.to_csv(
+        path,
+        mode="a",
+        header=not has_data,
+        index_label="Datetime",
+    )
+    return result
+
 def get_save_stock_data(code, reflesh = False):
     # 銘柄コードに対応する株価データを取得・保存する。
     # 初回はデータを取得し、dataフォルダ内に「銘柄名_5m.csv」という形で保存される、2回目以降はそのままdfで出力、プロパティrefleshを指定したら最新の時間で取得する

@@ -11,6 +11,7 @@ from functions import (
     update_portfolio,
     save_portfolio,
     get_valuation_data,
+    get_save_latest_stock_data,
 )
 from strategy import random_strategy
 from create_log import create_equity_log,create_trade_log,save_logs
@@ -29,63 +30,46 @@ stock_data = {}
 
 sold_today = set()
 simulation_date = None
-# 銘柄ごとの株価情報を取得
-for symbol in stocks["symbol"]:
-    df = get_save_stock_data(symbol,reflesh=False)
-    stock_data[symbol] = df
+
 # ログを作成しておく
 trade_logs = []
 equity_logs = []
 # 実行ごとに保存先を変えて、前回のログも残す
 log_dir = f"logs/"
 
-# シミュレータを実行
-# 時刻列を作成（全銘柄のタイムスタンプを取得し、古い順に並べ替え、重複削除）
-all_times = get_all_timestamps(stock_data)
+# 実行した時
+# 現時点での全銘柄のデータを取得
+for symbol in stocks["symbol"]:
+    latest = get_save_latest_stock_data(symbol)
+    stock_data[symbol] = pd.DataFrame([latest]).set_index("Datetime")
 
-for i, current_time in enumerate(all_times):
-    # 差金決済対策のための1日あたりの売り注文ログのクリア（同じ日に同じものを占いようにするためんい）
-    if current_time.date() != simulation_date:
-        simulation_date = current_time.date()
-        sold_today.clear()
-    for symbol, df in stock_data.items():
-        # この銘柄に、その時刻のデータがなければ飛ばす
-        if current_time not in df.index:
-            continue
-        row = df.loc[current_time]
-        # print(current_time, symbol, row["Open"])
-        # 売買判断
-        order = random_strategy(current_time, symbol, stock_data[symbol], portfolio, rng)
-        # validate_orderにsold_todayを渡して確認
-        if not validate_order(portfolio, order, sold_today):
-            continue
-        # 売買成立・portfolio更新
-        # 注文を確認する
-        portfolio = update_portfolio(portfolio, order, current_time)
-        # 売買履歴ログを作成
-        trade_logs.append(create_trade_log(order, portfolio, current_time))
+# strategy.pyをもとに売買の判断を行う
+for symbol, df in stock_data.items(): 
+    current_time = df.index[-1]
+    # 売買判断
+    order = random_strategy(current_time, symbol, df, portfolio, rng)
+    # validate_orderにsold_todayを渡して確認
+    if not validate_order(portfolio, order, sold_today):
+        continue
+    # 売買成立・portfolio更新
+    # 注文を確認する
+    portfolio = update_portfolio(portfolio, order, current_time)
+    # 売買履歴ログを作成
+    trade_logs.append(create_trade_log(order, portfolio, current_time))
 
-        # 売却が成立した銘柄を記録する
-        if order["action"] == "sell":
-            sold_today.add(order["symbol"])
+    # 売却が成立した銘柄を記録する
+    if order["action"] == "sell":
+        sold_today.add(order["symbol"])
 
-        print(portfolio)
+    print(portfolio)
 
-    # その時刻の全銘柄を処理した後、1日につき1件の資産ログを追加する
-    is_day_end = (
-        i == len(all_times) - 1
-        or all_times[i + 1].date() != current_time.date()
-    )
-
-    if is_day_end:
+    if stock_data:
+        evaluation_time = max(df.index[-1] for df in stock_data.values())
         latest_prices, valuation_time = get_valuation_data(
-            stock_data, portfolio, current_time
+            stock_data, portfolio, evaluation_time
         )
-
         equity_logs.append(
-            create_equity_log(
-                portfolio, latest_prices, valuation_time
-            )
+            create_equity_log(portfolio, latest_prices, valuation_time)
         )
 
 # シミュレーション終了後の口座状況を保存する
