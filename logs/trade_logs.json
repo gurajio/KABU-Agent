@@ -1,56 +1,47 @@
 [
     {
-        "datetime": "2026-09-25 15:20:00+09:00",
-        "symbol": "9432.T",
-        "action": "buy",
-        "quantity": 100,
-        "price": 175.5,
-        "cost": 0,
-        "cash_after": 471200.0
-    },
-    {
-        "datetime": "2026-09-25 15:20:00+09:00",
-        "symbol": "4689.T",
-        "action": "buy",
-        "quantity": 100,
-        "price": 510.0,
-        "cost": 0,
-        "cash_after": 420200.0
-    },
-    {
-        "datetime": "2026-09-25 15:20:00+09:00",
+        "datetime": "2026-09-30 13:25:00+09:00",
         "symbol": "6966.T",
-        "action": "buy",
+        "action": "sell",
         "quantity": 100,
-        "price": 885.0,
+        "price": 904.0,
         "cost": 0,
-        "cash_after": 331700.0
+        "cash_after": 93310.00061035156
     },
     {
-        "datetime": "2026-09-25 15:20:00+09:00",
+        "datetime": "2026-09-30 13:20:00+09:00",
         "symbol": "9166.T",
         "action": "buy",
         "quantity": 100,
-        "price": 672.0,
+        "price": 654.0,
         "cost": 0,
-        "cash_after": 264500.0
+        "cash_after": 27910.000610351562
     },
     {
-        "datetime": "2026-09-25 15:20:00+09:00",
+        "datetime": "2026-09-30 13:25:00+09:00",
         "symbol": "6632.T",
-        "action": "buy",
+        "action": "sell",
         "quantity": 100,
-        "price": 1016.0,
+        "price": 1009.5,
         "cost": 0,
-        "cash_after": 162900.0
+        "cash_after": 128860.00061035156
     },
     {
-        "datetime": "2026-09-25 15:20:00+09:00",
+        "datetime": "2026-09-30 13:20:00+09:00",
         "symbol": "9519.T",
+        "action": "sell",
+        "quantity": 100,
+        "price": 827.0,
+        "cost": 0,
+        "cash_after": 211560.00061035156
+    },
+    {
+        "datetime": "2026-09-30 13:25:00+09:00",
+        "symbol": "6768.T",
         "action": "buy",
         "quantity": 100,
-        "price": 854.0,
+        "price": 918.0,
         "cost": 0,
-        "cash_after": 77500.0
+        "cash_after": 119760.00061035156
     }
 ]

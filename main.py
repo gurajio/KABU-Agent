@@ -17,7 +17,8 @@ from strategy import random_strategy
 from create_log import create_equity_log,create_trade_log,save_logs
 
 # 乱数生成器を固定
-rng = random.Random(43)
+FIXED_SEED = False
+rng = random.Random(43 if FIXED_SEED else None)
 # 銘柄一覧CSVを読み込む
 stocks = pd.read_csv("tickers.csv")
 
