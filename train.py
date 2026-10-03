@@ -6,7 +6,7 @@ from ml import FeatureConfig, fit_model, save_model
 
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
-MARKET_CSV = None
+MARKET_CSV = Path("data") / "^N225_5m.csv"
 TRAIN_START = "2026-08-05 00:00:00+09:00"
 TRAIN_END = "2026-09-05 15:30:00+09:00"
 HORIZON = 2
@@ -22,14 +22,17 @@ FEATURE_PARAMS = {
     "corr_window": 6,
     "timestamp_kind": "start",
     "sessions": (("09:00", "11:30"), ("12:30", "15:30")),
-    "market_name": "",
+    "market_name": "日経平均",
 }
 FOREST_PARAMS = {"n_estimators": 100, "max_depth": 5, "random_state": 43}
 
 
 def read_prices(path):
     frame = pd.read_csv(path, index_col=0, parse_dates=[0])
-    return frame.loc[frame.index >= pd.Timestamp(TRAIN_START)]
+    return frame.loc[
+        (frame.index >= pd.Timestamp(TRAIN_START))
+        & (frame.index <= pd.Timestamp(TRAIN_END))
+    ]
 
 
 def main():
