@@ -14,9 +14,11 @@ from functions import (
     save_portfolio,
     get_valuation_data,
 )
+from ml import load_model, predict_up
 from strategy import random_strategy
 from create_log import create_equity_log,create_trade_log,save_logs
 
+# model = load_model("models/rf_v1.pkl")
 # 乱数生成器を固定
 rng = random.Random(43)
 # 銘柄一覧CSVを読み込む

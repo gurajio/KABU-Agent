@@ -2,6 +2,8 @@ import pandas as pd
 import yfinance as yf
 from pathlib import Path
 import json
+import os
+import tempfile
 
 def get_save_latest_stock_data(code: str) -> dict:
     path = Path("data") / f"{code}_5m.csv"
@@ -19,7 +21,7 @@ def get_save_latest_stock_data(code: str) -> dict:
         saved = pd.read_csv(path, usecols=["Datetime"])
         saved_times = pd.to_datetime(saved["Datetime"], utc=True)
         latest_time = pd.to_datetime(latest.index[0], utc=True)
-        if latest_time in saved_times.values:
+        if saved_times.eq(latest_time).any():
             return result
 
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -37,13 +39,16 @@ def get_save_stock_data(code, reflesh = False):
     # 現状の設定としては「5分足」「取得可能な全期間」を取得
     # 内容としては「始値、高値、安値、終値、出来高」
     # 入力：銘柄コード(string)、出力：DataFrame
-    ticker = yf.Ticker(code)
-    
     path = Path("data")/f"{code}_5m.csv"
-    if path.exists() and not reflesh:
-        return pd.read_csv(path, index_col=0, parse_dates=[0])
+    saved = None
+    if path.exists():
+        saved = pd.read_csv(path, index_col=0, parse_dates=[0])
+        saved.index = saved.index.tz_convert("Asia/Tokyo")
+        saved = saved.loc[~saved.index.duplicated(keep="last")].sort_index()
+        if not reflesh:
+            return saved
     
-    df = ticker.history(
+    df = yf.Ticker(code).history(
         period="max",
         interval="5m",
         auto_adjust=False,
@@ -53,9 +58,23 @@ def get_save_stock_data(code, reflesh = False):
         raise ValueError(f"{code} の株価を取得できませんでした")
     
     df = df[["Open","High","Low","Close","Volume"]]
+    df.index = df.index.tz_convert("Asia/Tokyo")
+    if saved is not None:
+        df = pd.concat([saved, df])
+    df = df.loc[~df.index.duplicated(keep="last")].sort_index()
     
     path.parent.mkdir(exist_ok=True)
-    df.to_csv(path)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", newline="", dir=path.parent, delete=False) as stream:
+            temporary = Path(stream.name)
+            df.to_csv(stream, index_label="Datetime")
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
     
     return df
 
