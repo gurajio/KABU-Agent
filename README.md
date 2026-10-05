@@ -21,10 +21,16 @@ WindowsのPowerShellでKABU-Agentフォルダを開きます。現在は `data/`
   日またぎ・昼休み・足の欠落・欠損で特徴量の履歴を区切ります。
 - 日末の評価は同日中の直近の有効な終値を使い、価格の時刻も記録します。
   当日の有効な終値がない場合は停止します。
-- 初期資金100万円、注文単位100株、売買閾値0.55/0.45、手数料・スリッページ0は
-  既存シミュレーションの設定です。業種・保有比率の制限は未実装です。
+- 初期資金は `simulation.py` の `INITIAL_CASH`、注文単位は100株、売買閾値は
+  0.55/0.45、手数料・スリッページは0です。初期資金は `--initial-cash` で指定できます。
+- 購入後に総資産の10%を現金で残し、1銘柄の保有額は買い増しを含め総資産の10%以下に
+  制限します。判定には判断時点のOpen、足がなければ過去の確定Closeを使い、将来の値は
+  使いません。価格変動による上限超過での強制売却・業種別の制限は未実装です。
+  `--cash-reserve` と `--position-limit` は0〜1の比率で指定します。
 - 結果は `logs/rf_<期間>_<実行日時>/` に保存します。売買、資産推移、最終保有、
   予測確率、実行条件を記録し、以前の結果は上書きしません。
+  `settings.json` の `order_counts` で資金不足・予備資金制限・銘柄上限などの見送り数を
+  確認できます。売買ログには取引直後の現金比率と対象銘柄の保有比率も記録します。
 - `main.py` は最新株価の取得用の既存処理です。過去データのシミュレーションは
   `simulation.py` を使用してください。
 
@@ -38,8 +44,35 @@ python -m venv .venv
 テストは外部通信を使いません。
 
 ```powershell
-.\.venv\Scripts\python.exe -m unittest test_setup_data test_simulation
+.\.venv\Scripts\python.exe -m unittest test_setup_data test_simulation test_train
 ```
+
+## 予測確率が集中する原因を検証する
+
+現在の木の深さ5と、深さ10・20・制限なしの候補を検証期間で比較します。
+葉の最低標本数も1・20・100の組み合わせを含む計6候補です。
+学習期間だけで学習し、検証期間だけで精度を計算します。テスト期間は使いません。
+
+```powershell
+.\.venv\Scripts\python.exe train.py --compare
+```
+
+結果は新規の `logs/model_validation_<実行日時>/` に保存します。
+`comparisons.csv` に検証AUC・Brier・log loss、学習AUC、確率の平均・標準偏差・分位点を
+記録し、各候補のモデルと正解がそろう検証行の予測CSV、実行条件JSONを併せて保存します。
+AUCは大きいほど、Brier・log lossは小さいほど良い指標です。定数予測とのBrierの比較と、
+学習・検証AUCの差も確認します。確率が広がったことだけを改善とは扱いません。
+`models/rf_current.pkl` の採用モデルは変更しません。比較途中の失敗はJSONに記録します。
+
+候補を選んだ後は、その `.pkl` を `--model` で明示します。既存モデルで資金制限を
+確認する例（初期資金100万円、閾値0.42/0.35）：
+
+```powershell
+.\.venv\Scripts\python.exe simulation.py --strategy rf --period validation --initial-cash 1000000 --buy-threshold 0.42 --sell-threshold 0.35
+```
+
+個別の学習では `train.py --max-depth 10 --min-samples-leaf 20 --model models/別名.pkl`
+のように指定できます。検証で設定を決めてから、テスト期間で最終評価します。
 
 ## 日単位の資産推移を画像にする
 

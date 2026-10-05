@@ -7,8 +7,11 @@
         "price": 774.0,
         "cost": 0,
         "cash_after": 922600.0,
+        "decision_assets": 1000000.0,
+        "cash_ratio_after": 0.9226,
+        "position_ratio_after": 0.0774,
         "reason": "上昇確率=0.450371によりbuy",
-        "up_probability": 0.45037096468778864
+        "up_probability": 0.45037096468778853
     },
     {
         "datetime": "2026-09-08 09:50:00+09:00",
@@ -18,6 +21,9 @@
         "price": 920.7000122070312,
         "cost": 0,
         "cash_after": 830529.9987792969,
+        "decision_assets": 1000000.0,
+        "cash_ratio_after": 0.8305299987792969,
+        "position_ratio_after": 0.09207000122070312,
         "reason": "上昇確率=0.431357によりbuy",
         "up_probability": 0.43135690073068106
     },
@@ -29,8 +35,11 @@
         "price": 168.39999389648438,
         "cost": 0,
         "cash_after": 813689.9993896484,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.8138283512027957,
+        "position_ratio_after": 0.01684286269686704,
         "reason": "上昇確率=0.460370によりbuy",
-        "up_probability": 0.460370113036861
+        "up_probability": 0.46037011303686093
     },
     {
         "datetime": "2026-09-08 09:55:00+09:00",
@@ -40,8 +49,11 @@
         "price": 688.7000122070312,
         "cost": 0,
         "cash_after": 744819.9981689453,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.7449466400071052,
+        "position_ratio_after": 0.06888171119569052,
         "reason": "上昇確率=0.460282によりbuy",
-        "up_probability": 0.4602819498652022
+        "up_probability": 0.460281949865202
     },
     {
         "datetime": "2026-09-08 09:55:00+09:00",
@@ -51,8 +63,11 @@
         "price": 555.5999755859375,
         "cost": 0,
         "cash_after": 689260.0006103516,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.6893771955751242,
+        "position_ratio_after": 0.05556944443198098,
         "reason": "上昇確率=0.449342によりbuy",
-        "up_probability": 0.4493422821965031
+        "up_probability": 0.449342282196503
     },
     {
         "datetime": "2026-09-08 09:55:00+09:00",
@@ -62,6 +77,9 @@
         "price": 238.6999969482422,
         "cost": 0,
         "cash_after": 665390.0009155273,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.6655031372612435,
+        "position_ratio_after": 0.023874058313880717,
         "reason": "上昇確率=0.459445によりbuy",
         "up_probability": 0.45944470214280003
     },
@@ -73,8 +91,11 @@
         "price": 771.0999755859375,
         "cost": 0,
         "cash_after": 588280.0033569336,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.5883800286800466,
+        "position_ratio_after": 0.07712310858119698,
         "reason": "上昇確率=0.445179によりbuy",
-        "up_probability": 0.4451794320328942
+        "up_probability": 0.4451794320328943
     },
     {
         "datetime": "2026-09-08 09:55:00+09:00",
@@ -84,6 +105,9 @@
         "price": 261.0,
         "cost": 0,
         "cash_after": 562180.0033569336,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.5622755908937571,
+        "position_ratio_after": 0.026104437786289438,
         "reason": "上昇確率=0.445824によりbuy",
         "up_probability": 0.4458244838769416
     },
@@ -95,6 +119,9 @@
         "price": 306.8999938964844,
         "cost": 0,
         "cash_after": 531490.0039672852,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.5315803732796445,
+        "position_ratio_after": 0.030695217614112584,
         "reason": "上昇確率=0.459988によりbuy",
         "up_probability": 0.4599880555687472
     },
@@ -106,8 +133,11 @@
         "price": 733.9000244140625,
         "cost": 0,
         "cash_after": 458100.0015258789,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.45817789232687367,
+        "position_ratio_after": 0.07340248095277085,
         "reason": "上昇確率=0.447859によりbuy",
-        "up_probability": 0.4478590250955754
+        "up_probability": 0.44785902509557524
     },
     {
         "datetime": "2026-09-08 09:55:00+09:00",
@@ -117,8 +147,11 @@
         "price": 526.9000244140625,
         "cost": 0,
         "cash_after": 405409.99908447266,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.40547893099771165,
+        "position_ratio_after": 0.05269896132916199,
         "reason": "上昇確率=0.455388によりbuy",
-        "up_probability": 0.455387607493061
+        "up_probability": 0.45538760749306106
     },
     {
         "datetime": "2026-09-08 09:55:00+09:00",
@@ -128,6 +161,9 @@
         "price": 162.10000610351562,
         "cost": 0,
         "cash_after": 389199.9984741211,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.38926617419891335,
+        "position_ratio_after": 0.01621275679879832,
         "reason": "上昇確率=0.428967によりbuy",
         "up_probability": 0.42896687714101717
     },
@@ -139,6 +175,9 @@
         "price": 589.5,
         "cost": 0,
         "cash_after": 330249.9984741211,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.33030615092298377,
+        "position_ratio_after": 0.05896002327592959,
         "reason": "上昇確率=0.454090によりbuy",
         "up_probability": 0.4540897252791944
     },
@@ -150,8 +189,11 @@
         "price": 272.0,
         "cost": 0,
         "cash_after": 303049.9984741211,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.3031015261035557,
+        "position_ratio_after": 0.027204624819428074,
         "reason": "上昇確率=0.428205によりbuy",
-        "up_probability": 0.42820496381928125
+        "up_probability": 0.42820496381928114
     },
     {
         "datetime": "2026-09-08 09:55:00+09:00",
@@ -161,6 +203,9 @@
         "price": 953.9000244140624,
         "cost": 0,
         "cash_after": 207659.99603271484,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.2076953044880121,
+        "position_ratio_after": 0.09540622161554355,
         "reason": "上昇確率=0.455345によりbuy",
         "up_probability": 0.45534543448826675
     },
@@ -172,41 +217,11 @@
         "price": 817.7000122070312,
         "cost": 0,
         "cash_after": 125889.99481201172,
+        "decision_assets": 999829.9987792969,
+        "cash_ratio_after": 0.1259113999036958,
+        "position_ratio_after": 0.08178390458431632,
         "reason": "上昇確率=0.450576によりbuy",
         "up_probability": 0.45057588787190134
-    },
-    {
-        "datetime": "2026-09-08 09:55:00+09:00",
-        "symbol": "7211.T",
-        "action": "buy",
-        "quantity": 100,
-        "price": 358.3999938964844,
-        "cost": 0,
-        "cash_after": 90049.99542236328,
-        "reason": "上昇確率=0.449812によりbuy",
-        "up_probability": 0.44981153148642705
-    },
-    {
-        "datetime": "2026-09-08 09:55:00+09:00",
-        "symbol": "2181.T",
-        "action": "buy",
-        "quantity": 100,
-        "price": 288.0,
-        "cost": 0,
-        "cash_after": 61249.99542236328,
-        "reason": "上昇確率=0.460101によりbuy",
-        "up_probability": 0.4601008375256861
-    },
-    {
-        "datetime": "2026-09-08 09:55:00+09:00",
-        "symbol": "8410.T",
-        "action": "buy",
-        "quantity": 100,
-        "price": 336.0,
-        "cost": 0,
-        "cash_after": 27649.99542236328,
-        "reason": "上昇確率=0.449268によりbuy",
-        "up_probability": 0.4492676743438813
     },
     {
         "datetime": "2026-09-08 10:00:00+09:00",
@@ -215,9 +230,12 @@
         "quantity": 100,
         "price": 168.3000030517578,
         "cost": 0,
-        "cash_after": 10819.9951171875,
+        "cash_after": 109059.99450683594,
+        "decision_assets": 999549.9938964844,
+        "cash_ratio_after": 0.10910909426520433,
+        "position_ratio_after": 0.03367515463547436,
         "reason": "上昇確率=0.467053によりbuy",
-        "up_probability": 0.46705329946183466
+        "up_probability": 0.46705329946183477
     },
     {
         "datetime": "2026-09-08 10:45:00+09:00",
@@ -226,9 +244,12 @@
         "quantity": 100,
         "price": 274.0,
         "cost": 0,
-        "cash_after": 38219.9951171875,
+        "cash_after": 136459.99450683594,
+        "decision_assets": 1003499.9969482422,
+        "cash_ratio_after": 0.13598405074422154,
+        "position_ratio_after": 0.0,
         "reason": "上昇確率=0.341037によりsell",
-        "up_probability": 0.3410374125188669
+        "up_probability": 0.3410374125188668
     },
     {
         "datetime": "2026-09-08 10:45:00+09:00",
@@ -237,9 +258,12 @@
         "quantity": 100,
         "price": 356.8999938964844,
         "cost": 0,
-        "cash_after": 2529.9957275390625,
+        "cash_after": 100769.9951171875,
+        "decision_assets": 1003499.9969482422,
+        "cash_ratio_after": 0.10041853056665724,
+        "position_ratio_after": 0.035565520177564314,
         "reason": "上昇確率=0.432193によりbuy",
-        "up_probability": 0.43219275932521656
+        "up_probability": 0.4321927593252166
     },
     {
         "datetime": "2026-09-08 10:50:00+09:00",
@@ -248,7 +272,10 @@
         "quantity": 100,
         "price": 262.0,
         "cost": 0,
-        "cash_after": 28729.995727539062,
+        "cash_after": 126969.9951171875,
+        "decision_assets": 1004309.9975585938,
+        "cash_ratio_after": 0.1264251032309173,
+        "position_ratio_after": 0.0,
         "reason": "上昇確率=0.343761によりsell",
         "up_probability": 0.3437611520788706
     },
@@ -259,7 +286,10 @@
         "quantity": 100,
         "price": 169.8000030517578,
         "cost": 0,
-        "cash_after": 11749.995422363281,
+        "cash_after": 109989.99481201172,
+        "decision_assets": 1004440.0024414062,
+        "cash_ratio_after": 0.10950379768295614,
+        "position_ratio_after": 0.05071482696000941,
         "reason": "上昇確率=0.425238によりbuy",
         "up_probability": 0.4252379541327443
     },
@@ -270,7 +300,10 @@
         "quantity": 100,
         "price": 760.0,
         "cost": 0,
-        "cash_after": 87749.99542236328,
+        "cash_after": 185989.99481201172,
+        "decision_assets": 994009.9960327148,
+        "cash_ratio_after": 0.18711078918153096,
+        "position_ratio_after": 0.0,
         "reason": "上昇確率=0.349956によりsell",
         "up_probability": 0.3499562224497954
     },
@@ -281,7 +314,10 @@
         "quantity": 100,
         "price": 338.79998779296875,
         "cost": 0,
-        "cash_after": 53869.996643066406,
+        "cash_after": 152109.99603271484,
+        "decision_assets": 994009.9960327148,
+        "cash_ratio_after": 0.15302662613033582,
+        "position_ratio_after": 0.034084163051195125,
         "reason": "上昇確率=0.454362によりbuy",
         "up_probability": 0.45436173359757376
     },
@@ -292,8 +328,11 @@
         "quantity": 100,
         "price": 485.2000122070313,
         "cost": 0,
-        "cash_after": 5349.995422363274,
+        "cash_after": 103589.99481201172,
+        "decision_assets": 994009.9960327148,
+        "cash_ratio_after": 0.10421423851415913,
+        "position_ratio_after": 0.04881238761617669,
         "reason": "上昇確率=0.456945によりbuy",
-        "up_probability": 0.45694541515341847
+        "up_probability": 0.4569454151534184
     }
 ]
