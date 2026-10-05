@@ -1,3 +1,6 @@
+import argparse
+import hashlib
+import os
 from pathlib import Path
 
 import numpy as np
@@ -8,15 +11,15 @@ from ml import FeatureConfig, fit_model, save_model
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
 MARKET_CSV = Path("data") / "^N225_5m.csv"
-TRAIN_START = "2026-08-05 00:00:00+09:00"
+TRAIN_START = "2026-08-07 00:00:00+09:00"
 TRAIN_END = "2026-09-07 15:30:00+09:00"
 PERIODS = {
     "validation": ("2026-09-08 00:00:00+09:00", "2026-09-17 15:30:00+09:00"),
     "test": ("2026-09-18 00:00:00+09:00", "2026-10-02 15:30:00+09:00"),
 }
 HORIZON = 2
-WORKERS = 4
-MODEL_PATH = ROOT / "models" / "rf_602020.pkl"
+WORKERS = min(4, max(1, (os.cpu_count() or 1) - 1))
+MODEL_PATH = ROOT / "models" / "rf_current.pkl"
 FEATURE_PARAMS = {
     "mean_window": 6,
     "std_window": 6,
@@ -55,6 +58,8 @@ def read_prices(path, *, end=TRAIN_END):
     )
     if invalid:
         raise ValueError(f"価格・出来高に不正な値があります: {path}")
+    if not frame.notna().all(axis=1).any():
+        raise ValueError(f"有効なOHLCVの足がありません: {path}")
     return frame
 
 
@@ -64,13 +69,31 @@ def load_data(*, end=TRAIN_END):
         raise ValueError("tickers.csvの銘柄に欠損・重複があります。")
     prices = {symbol: read_prices(DATA_DIR / f"{symbol}_5m.csv", end=end) for symbol in symbols}
     market = read_prices(ROOT / MARKET_CSV, end=end)
+    for symbol, frame in [*prices.items(), ("^N225", market)]:
+        missing = int(frame.isna().any(axis=1).sum())
+        print(f"データ確認 {symbol}: {len(frame)}本、{frame.index[0]}〜{frame.index[-1]}、欠損行={missing}")
+    print("欠損は補完しません。取得条件・休場日を含む網羅性はCSVだけでは確認できません。")
     return prices, market
 
 
+def data_hash():
+    symbols = pd.read_csv(ROOT / "tickers.csv")["symbol"].tolist()
+    digest = hashlib.sha256()
+    for path in [ROOT / "tickers.csv", *[DATA_DIR / f"{s}_5m.csv" for s in sorted(symbols)], ROOT / MARKET_CSV]:
+        digest.update(path.name.encode())
+        digest.update(path.read_bytes())
+    return digest.hexdigest()
+
+
 def main():
+    parser = argparse.ArgumentParser(description="保存済みCSVからRFモデルを学習します。")
+    parser.add_argument("--model", type=Path, default=MODEL_PATH)
+    args = parser.parse_args()
+    destination = (ROOT / args.model).resolve()
     config = FeatureConfig(**FEATURE_PARAMS)
-    if MODEL_PATH.exists():
-        raise FileExistsError(f"保存先が存在します。MODEL_PATHを変更してください: {MODEL_PATH}")
+    if destination.exists():
+        raise FileExistsError(f"保存先が存在します。--modelで別名を指定してください: {destination}")
+    fingerprint = data_hash()
     prices, market = load_data()
     print(f"学習期間: {TRAIN_START} 〜 {TRAIN_END}、銘柄数: {len(prices)}")
     model = fit_model(
@@ -78,8 +101,12 @@ def main():
         horizon=HORIZON, train_end=TRAIN_END,
         forest_params=FOREST_PARAMS, workers=WORKERS,
     )
-    save_model(model, MODEL_PATH)
-    print(f"モデルを保存しました: {MODEL_PATH}")
+    if data_hash() != fingerprint:
+        raise ValueError("学習中にCSVが変更されたため、モデルを保存しません。")
+    model.data_hash = fingerprint
+    model.train_start = TRAIN_START
+    save_model(model, destination)
+    print(f"モデルを保存しました: {destination}")
 
 
 if __name__ == "__main__":

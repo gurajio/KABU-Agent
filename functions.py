@@ -187,14 +187,14 @@ def get_valuation_data(stock_data, portfolio, current_time):
         day_data = df[
             (df.index.date == current_time.date())
             & (df.index <= current_time)
-        ]
+        ].dropna(subset=["Close"])
 
         if day_data.empty:
             raise ValueError(
                 f"{symbol} の {current_time.date()} の評価価格がありません"
             )
 
-        # その銘柄の最後の行から終値を取得する
+        # 当日中に確定した直近の有効な終値で評価し、実際の価格時刻も記録する。
         last_row = day_data.iloc[-1]
 
         latest_prices[symbol] = {

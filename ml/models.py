@@ -27,6 +27,8 @@ class ModelBundle:
     sklearn_version: str
     feature_names: tuple[str, ...] = FEATURE_COLUMNS
     schema_version: int = 1
+    data_hash: str | None = None
+    train_start: str | None = None
 
 
 # 確定足の次のOpenからhorizon本後のOpenへの変化を正解とする。時刻列は約定想定時刻。

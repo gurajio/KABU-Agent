@@ -3,6 +3,7 @@ import json
 import random
 from dataclasses import asdict
 from datetime import datetime
+from pathlib import Path
 
 import pandas as pd
 
@@ -10,7 +11,7 @@ from functions import validate_order, update_portfolio, get_valuation_data, save
 from ml import FeatureConfig, load_model, predict_up
 from strategy import random_strategy, rf_strategy
 from create_log import create_equity_log, create_trade_log, save_logs
-from train import ROOT, MODEL_PATH, TRAIN_START, TRAIN_END, PERIODS, FEATURE_PARAMS, HORIZON, load_data
+from train import ROOT, MODEL_PATH, TRAIN_START, TRAIN_END, PERIODS, FEATURE_PARAMS, HORIZON, load_data, data_hash
 
 INITIAL_CASH = 1_000_000
 SEED = 43
@@ -82,15 +83,20 @@ def main():
     parser.add_argument("--period", choices=tuple(PERIODS), default="validation")
     parser.add_argument("--buy-threshold", type=float, default=0.55)
     parser.add_argument("--sell-threshold", type=float, default=0.45)
+    parser.add_argument("--model", type=Path, default=MODEL_PATH)
     args = parser.parse_args()
     if not 0 <= args.sell_threshold < args.buy_threshold <= 1:
         parser.error("閾値は 0 ≦ 売り < 買い ≦ 1 にしてください。")
     start, end = map(pd.Timestamp, PERIODS[args.period])
     model = None
+    model_path = (ROOT / args.model).resolve()
+    fingerprint = data_hash()
     if args.strategy == "rf":
-        if not MODEL_PATH.exists():
-            raise FileNotFoundError(f"先にtrain.pyを実行してください: {MODEL_PATH}")
-        model = load_model(MODEL_PATH)
+        if not model_path.exists():
+            raise FileNotFoundError(f"先にtrain.pyを実行してください: {model_path}")
+        model = load_model(model_path)
+        if getattr(model, "data_hash", None) != fingerprint or getattr(model, "train_start", None) != TRAIN_START:
+            raise ValueError("モデルと現在のCSV・学習開始日が一致しません。train.pyで新しいモデルを作成してください。")
         if (model.train_end != pd.Timestamp(TRAIN_END) or model.train_end >= start
                 or model.config != FeatureConfig(**FEATURE_PARAMS) or model.horizon != HORIZON):
             raise ValueError("モデルの学習条件が現在の設定と異なります。train.pyで再学習してください。")
@@ -112,6 +118,8 @@ def main():
         prices, probabilities, strategy=args.strategy, start=start, end=end,
         buy_threshold=args.buy_threshold, sell_threshold=args.sell_threshold,
     )
+    if data_hash() != fingerprint:
+        raise ValueError("実行中にCSVが変更されたため、シミュレーション結果を保存しません。")
     output = ROOT / "logs" / f"{args.strategy}_{args.period}_{datetime.now():%Y%m%d_%H%M%S_%f}"
     output.mkdir(parents=True, exist_ok=False)
     save_logs(trades, equity, output_dir=output)
@@ -127,7 +135,9 @@ def main():
         "sell_threshold": args.sell_threshold, "missing_open_skips": skipped,
         "fill_rule": "直前までに確定した足で判断し、現在の足のOpenで約定。手数料・スリッページ0。",
         "final_assets": equity[-1]["total_assets"],
-        "model_path": str(MODEL_PATH) if model is not None else None,
+        "model_path": str(model_path) if model is not None else None,
+        "data_hash": fingerprint,
+        "data_quality": "欠損は補完せず、特徴量不足では判断なし。取得条件・期間網羅性は未確認。",
         "features": asdict(model.config) if model is not None else None,
     }
     with (output / "settings.json").open("w", encoding="utf-8") as stream:

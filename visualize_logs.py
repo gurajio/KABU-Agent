@@ -1,4 +1,6 @@
+import argparse
 import json
+from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -10,6 +12,7 @@ from matplotlib.ticker import StrMethodFormatter, MaxNLocator
 
 # このPythonファイルと同じ場所にあるlogsフォルダを読み込む
 LOG_DIR = Path(__file__).resolve().parent / "logs"
+LOG_FOLDER = "rf_validation_20261005_144952_400811"
 
 
 def load_logs(log_dir):
@@ -24,7 +27,9 @@ def load_logs(log_dir):
         raise ValueError("資産ログが空です。先にシミュレーションを実行してください。")
 
     equity["datetime"] = pd.to_datetime(equity["datetime"], utc=True).dt.tz_convert("Asia/Tokyo")
-    equity = equity.sort_values("datetime")
+    equity = equity.sort_values("datetime", kind="stable")
+    equity = equity.drop_duplicates(subset="datetime", keep="last")
+    equity = equity.groupby(equity["datetime"].dt.normalize(), sort=True).tail(1)
 
     if not trades.empty:
         trades["datetime"] = pd.to_datetime(trades["datetime"], utc=True).dt.tz_convert("Asia/Tokyo")
@@ -33,8 +38,10 @@ def load_logs(log_dir):
     return trades, equity
 
 
-def plot_logs(trades, equity):
+def plot_logs(trades, equity, *, title=""):
     fig, axes = plt.subplots(2, 1, figsize=(12, 8), sharex=True, layout="constrained")
+    if title:
+        fig.suptitle(title)
 
     # 上段：総資産・現金・保有株の評価額
     dates = equity["datetime"].dt.normalize()
@@ -80,12 +87,25 @@ def plot_logs(trades, equity):
     return fig
 
 
-if __name__ == "__main__":
-    trades, equity = load_logs(LOG_DIR)
-    fig = plot_logs(trades, equity)
+def main():
+    parser = argparse.ArgumentParser(description="指定ログフォルダから日単位の資産推移をPNGに保存します。")
+    parser.add_argument("folder", nargs="?", type=Path, default=Path(LOG_FOLDER), help="省略時はコード上部のLOG_FOLDERを使用")
+    parser.add_argument("--show", action="store_true", help="画像保存後にグラフのウィンドウも表示する")
+    args = parser.parse_args()
+    if args.folder.is_absolute():
+        log_dir = args.folder
+    elif args.folder.parts[0] == "logs":
+        log_dir = LOG_DIR.parent / args.folder
+    else:
+        log_dir = LOG_DIR / args.folder
+    log_dir = log_dir.resolve()
+    try:
+        trades, equity = load_logs(log_dir)
+    except (OSError, ValueError, KeyError) as error:
+        parser.error(f"ログを読み込めません: {log_dir}\n{error}")
+    fig = plot_logs(trades, equity, title=log_dir.name)
 
-    # 画像としても保存し、グラフをウィンドウで表示する
-    output_path = LOG_DIR / "visualization.png"
+    output_path = log_dir / f"visualization_{datetime.now():%Y%m%d_%H%M%S_%f}.png"
     fig.savefig(output_path, dpi=150, bbox_inches="tight")
 
     print(f"売買履歴: {len(trades):,}件 / 資産ログ: {len(equity)}件")
@@ -95,4 +115,10 @@ if __name__ == "__main__":
         print("\n直近10件の売買履歴:")
         print(trades.tail(10).to_string(index=False))
     print(f"\nグラフの保存先: {output_path}")
-    plt.show()
+    if args.show:
+        plt.show()
+    plt.close(fig)
+
+
+if __name__ == "__main__":
+    main()
