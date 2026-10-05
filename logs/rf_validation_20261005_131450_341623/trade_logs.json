@@ -1,0 +1,24 @@
+[
+    {
+        "datetime": "2026-09-10 10:00:00+09:00",
+        "symbol": "6966.T",
+        "action": "buy",
+        "quantity": 100,
+        "price": 925.0,
+        "cost": 0,
+        "cash_after": 907500.0,
+        "reason": "上昇確率=0.552314によりbuy",
+        "up_probability": 0.5523137872610784
+    },
+    {
+        "datetime": "2026-09-10 10:20:00+09:00",
+        "symbol": "6966.T",
+        "action": "sell",
+        "quantity": 100,
+        "price": 940.0,
+        "cost": 0,
+        "cash_after": 1001500.0,
+        "reason": "上昇確率=0.434182によりsell",
+        "up_probability": 0.43418202388540644
+    }
+]

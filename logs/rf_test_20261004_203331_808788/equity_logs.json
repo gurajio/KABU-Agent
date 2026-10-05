@@ -1,0 +1,50 @@
+[
+    {
+        "datetime": "2026-09-18 15:30:00+09:00",
+        "positions": {},
+        "cash": 1000000.0,
+        "total_assets": 1000000.0
+    },
+    {
+        "datetime": "2026-09-24 15:25:00+09:00",
+        "positions": {},
+        "cash": 1000000.0,
+        "total_assets": 1000000.0
+    },
+    {
+        "datetime": "2026-09-25 15:25:00+09:00",
+        "positions": {},
+        "cash": 1000000.0,
+        "total_assets": 1000000.0
+    },
+    {
+        "datetime": "2026-09-28 15:30:00+09:00",
+        "positions": {},
+        "cash": 1001200.0,
+        "total_assets": 1001200.0
+    },
+    {
+        "datetime": "2026-09-29 15:25:00+09:00",
+        "positions": {},
+        "cash": 1001200.0,
+        "total_assets": 1001200.0
+    },
+    {
+        "datetime": "2026-09-30 15:30:00+09:00",
+        "positions": {},
+        "cash": 1001200.0,
+        "total_assets": 1001200.0
+    },
+    {
+        "datetime": "2026-10-01 15:30:00+09:00",
+        "positions": {},
+        "cash": 1001200.0,
+        "total_assets": 1001200.0
+    },
+    {
+        "datetime": "2026-10-02 15:30:00+09:00",
+        "positions": {},
+        "cash": 1001200.0,
+        "total_assets": 1001200.0
+    }
+]

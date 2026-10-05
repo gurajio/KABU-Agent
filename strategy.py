@@ -41,3 +41,24 @@ def random_strategy(
             "reason": f"ランダム条件で{action}と判断",
             "cost":cost,
         }
+
+
+def rf_strategy(symbol_code, price, portfolio, probability, *, buy_threshold=0.40, sell_threshold=0.35):
+    if not 0 <= sell_threshold < buy_threshold <= 1:
+        raise ValueError("閾値は 0 ≦ 売り < 買い ≦ 1 にしてください。")
+    holding = portfolio["positions"].get(symbol_code, {}).get("quantity", 0)
+    action = "keep"
+    if pd.isna(probability):
+        reason = "上昇確率を計算できないため売買なし"
+    else:
+        if not 0 <= probability <= 1:
+            raise ValueError("上昇確率は0〜1にしてください。")
+        if probability >= buy_threshold:
+            action = "buy"
+        elif probability <= sell_threshold and holding >= 100:
+            action = "sell"
+        reason = f"上昇確率={probability:.6f}により{action}"
+    return {
+        "symbol": symbol_code, "price": float(price), "quantity": 100,
+        "action": action, "reason": reason, "cost": 0,
+    }

@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 from ml import FeatureConfig, fit_model, save_model
@@ -8,10 +9,14 @@ ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
 MARKET_CSV = Path("data") / "^N225_5m.csv"
 TRAIN_START = "2026-08-05 00:00:00+09:00"
-TRAIN_END = "2026-09-05 15:30:00+09:00"
+TRAIN_END = "2026-09-07 15:30:00+09:00"
+PERIODS = {
+    "validation": ("2026-09-08 00:00:00+09:00", "2026-09-17 15:30:00+09:00"),
+    "test": ("2026-09-18 00:00:00+09:00", "2026-10-02 15:30:00+09:00"),
+}
 HORIZON = 2
 WORKERS = 4
-MODEL_PATH = ROOT / "models" / "rf_v1.pkl"
+MODEL_PATH = ROOT / "models" / "rf_602020.pkl"
 FEATURE_PARAMS = {
     "mean_window": 6,
     "std_window": 6,
@@ -27,30 +32,47 @@ FEATURE_PARAMS = {
 FOREST_PARAMS = {"n_estimators": 100, "max_depth": 5, "random_state": 43}
 
 
-def read_prices(path):
+def read_prices(path, *, end=TRAIN_END):
     frame = pd.read_csv(path, index_col=0, parse_dates=[0])
-    return frame.loc[
+    if not isinstance(frame.index, pd.DatetimeIndex) or frame.index.tz is None or frame.index.hasnans:
+        raise ValueError(f"タイムゾーン付きの欠損のない日時が必要です: {path}")
+    frame.index = frame.index.tz_convert("Asia/Tokyo")
+    frame = frame.loc[
         (frame.index >= pd.Timestamp(TRAIN_START))
-        & (frame.index <= pd.Timestamp(TRAIN_END))
+        & (frame.index + pd.Timedelta(minutes=5) <= pd.Timestamp(end))
     ]
+    if frame.empty or frame.index.has_duplicates or not frame.index.is_monotonic_increasing:
+        raise ValueError(f"データが空、または日時の重複・順序異常があります: {path}")
+    if (frame.index != frame.index.floor("5min")).any():
+        raise ValueError(f"5分足の開始時刻と一致しません: {path}")
+    frame = frame.loc[:, ["Open", "High", "Low", "Close", "Volume"]].astype(float)
+    prices = frame.drop(columns="Volume")
+    invalid = (
+        (prices <= 0).any().any() or (frame.Volume < 0).any()
+        or np.isinf(frame.to_numpy()).any() or (frame.High < frame.Low).any()
+        or (frame.High < frame[["Open", "Close"]].max(axis=1)).any()
+        or (frame.Low > frame[["Open", "Close"]].min(axis=1)).any()
+    )
+    if invalid:
+        raise ValueError(f"価格・出来高に不正な値があります: {path}")
+    return frame
+
+
+def load_data(*, end=TRAIN_END):
+    symbols = pd.read_csv(ROOT / "tickers.csv")["symbol"]
+    if symbols.empty or symbols.isna().any() or symbols.duplicated().any():
+        raise ValueError("tickers.csvの銘柄に欠損・重複があります。")
+    prices = {symbol: read_prices(DATA_DIR / f"{symbol}_5m.csv", end=end) for symbol in symbols}
+    market = read_prices(ROOT / MARKET_CSV, end=end)
+    return prices, market
 
 
 def main():
-    if not MARKET_CSV or not FEATURE_PARAMS["market_name"]:
-        raise ValueError("市場指数CSVの相対パスをMARKET_CSVに、指数名をmarket_nameに設定してください。")
     config = FeatureConfig(**FEATURE_PARAMS)
     if MODEL_PATH.exists():
         raise FileExistsError(f"保存先が存在します。MODEL_PATHを変更してください: {MODEL_PATH}")
-    market_path = (ROOT / MARKET_CSV).resolve()
-    market = read_prices(market_path)
-    prices = {
-        path.name.removesuffix("_5m.csv"): read_prices(path)
-        for path in sorted(DATA_DIR.glob("*.T_5m.csv"))
-        if path.resolve() != market_path
-    }
-    if not prices:
-        raise ValueError("dataフォルダに銘柄の5分足CSVがありません。")
-    print(f"読み込んだ銘柄数: {len(prices)}")
+    prices, market = load_data()
+    print(f"学習期間: {TRAIN_START} 〜 {TRAIN_END}、銘柄数: {len(prices)}")
     model = fit_model(
         prices=prices, market=market, config=config,
         horizon=HORIZON, train_end=TRAIN_END,
