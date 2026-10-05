@@ -51,9 +51,28 @@ def build_labels(prices, config, *, horizon, as_of=None):
     return result
 
 
-# pricesは{銘柄名: OHLCV}。train_endまでに確定した足だけで特徴量・正解を作る。
-def fit_model(prices, market, config, *, horizon, train_end, forest_params, workers):
+def build_samples(prices, market, config, *, horizon, end, start=None):
     _check_integer(horizon, "horizon", 1)
+    if not prices or any(not isinstance(symbol, str) or not symbol for symbol in prices):
+        raise ValueError("prices は銘柄名をキーとする空でない辞書にしてください。")
+    cutoff = _as_timestamp(end)
+    first = _as_timestamp(start) if start is not None else None
+    if first is not None and first > cutoff:
+        raise ValueError("開始日時は終了日時以前にしてください。")
+    rows, targets = {}, {}
+    for symbol in sorted(prices):
+        features = build_features(prices[symbol], market, config, as_of=cutoff)
+        labels = build_labels(prices[symbol], config, horizon=horizon, as_of=cutoff)
+        valid = features.notna().all(axis=1) & labels.target.notna() & labels.exit_time.le(cutoff)
+        if first is not None:
+            valid &= features.index >= first
+        rows[symbol] = features.loc[valid]
+        targets[symbol] = labels.loc[valid, "target"]
+    names = ["symbol", "decision_time"]
+    return pd.concat(rows, names=names), pd.concat(targets, names=names).astype(int)
+
+
+def fit_classifier(features, target, *, forest_params, workers):
     _check_integer(workers, "workers", 1)
     limit = max(1, (os.cpu_count() or 1) - 1)
     if workers > limit:
@@ -65,24 +84,20 @@ def fit_model(prices, market, config, *, horizon, train_end, forest_params, work
             raise ValueError(f"forest_params に {name} を明示してください。")
     _check_integer(forest_params["n_estimators"], "n_estimators", 1)
     _check_integer(forest_params["random_state"], "random_state", 0)
-    if not prices or any(not isinstance(symbol, str) or not symbol for symbol in prices):
-        raise ValueError("prices は銘柄名をキーとする空でない辞書にしてください。")
-    cutoff = _as_timestamp(train_end)
-    rows, targets = [], []
-    for symbol in sorted(prices):
-        features = build_features(prices[symbol], market, config, as_of=cutoff)
-        labels = build_labels(prices[symbol], config, horizon=horizon, as_of=cutoff)
-        valid = features.notna().all(axis=1) & labels.target.notna() & labels.exit_time.le(cutoff)
-        rows.append(features.loc[valid])
-        targets.append(labels.loc[valid, "target"])
-    features = pd.concat(rows)
-    target = pd.concat(targets).astype(int)
     if features.empty or target.nunique() != 2:
         raise ValueError("学習には、欠損のない特徴量と上昇・非上昇の両方の正解が必要です。")
     classifier = RandomForestClassifier(**forest_params, n_jobs=workers)
     print(f"ランダムフォレスト: 使用コア数={workers}, 学習行数={len(features)}")
     with threadpool_limits(limits=1):
         classifier.fit(features, target)
+    return classifier
+
+
+# pricesは{銘柄名: OHLCV}。train_endまでに確定した足だけで特徴量・正解を作る。
+def fit_model(prices, market, config, *, horizon, train_end, forest_params, workers):
+    cutoff = _as_timestamp(train_end)
+    features, target = build_samples(prices, market, config, horizon=horizon, end=cutoff)
+    classifier = fit_classifier(features, target, forest_params=forest_params, workers=workers)
     return ModelBundle(
         classifier, config, horizon, cutoff, len(features),
         tuple(sorted(prices)), sklearn.__version__,

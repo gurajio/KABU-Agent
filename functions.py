@@ -4,6 +4,7 @@ from pathlib import Path
 import json
 import os
 import tempfile
+import math
 
 def get_save_latest_stock_data(code: str) -> dict:
     path = Path("data") / f"{code}_5m.csv"
@@ -90,7 +91,11 @@ def get_all_timestamps(all_data):
     return all_times
 
 
-def validate_order(portfolio, order, sold_today):
+def order_reason(portfolio, order, sold_today, *, latest_prices=None, reserve_ratio=0, max_position_ratio=1):
+    if not math.isfinite(reserve_ratio) or not 0 <= reserve_ratio < 1:
+        raise ValueError("予備資金の割合は0以上1未満にしてください。")
+    if not math.isfinite(max_position_ratio) or not 0 < max_position_ratio <= 1:
+        raise ValueError("1銘柄の配分上限は0より大きく1以下にしてください。")
     symbol = order["symbol"]
     quantity = order["quantity"]
     price = order["price"]
@@ -99,25 +104,40 @@ def validate_order(portfolio, order, sold_today):
     position = portfolio["positions"].get(symbol, {})
     holding_quantity = position.get("quantity", 0)
     cash = portfolio["cash"]
+    if order["action"] not in {"buy", "sell"}:
+        return "keep"
+    if (not math.isfinite(price) or price <= 0 or not math.isfinite(cost) or cost < 0
+            or isinstance(quantity, bool) or not isinstance(quantity, int) or quantity <= 0):
+        raise ValueError("価格・注文数量は正、コストは0以上の有限値にしてください。")
 
     if order["action"] == "buy":
-        # 当日売却した銘柄は再購入しない
         if symbol in sold_today:
-            return False
-
+            return "sold_today"
         required_cash = price * quantity + cost
-        return cash >= required_cash
+        if cash < required_cash:
+            return "insufficient_cash"
+        if reserve_ratio or max_position_ratio < 1:
+            assets = cash
+            for code, held in portfolio["positions"].items():
+                mark = (latest_prices or {}).get(code)
+                if mark is None or not math.isfinite(mark) or mark <= 0:
+                    raise ValueError(f"{code} の判断時点の評価価格がありません。")
+                assets += held["quantity"] * mark
+            assets -= cost
+            if cash - required_cash < assets * reserve_ratio:
+                return "reserve_limit"
+            if (holding_quantity + quantity) * price > assets * max_position_ratio:
+                return "position_limit"
+        return None
+    if quantity > holding_quantity:
+        return "insufficient_holding"
+    if cash + price * quantity - cost < 0:
+        return "insufficient_cash"
+    return None
 
-    elif order["action"] == "sell":
-        # 保有数量を超えて売れない
-        if quantity > holding_quantity:
-            return False
 
-        # 売却後の現金を確認する
-        return cash + price * quantity - cost >= 0
-
-    # keepなど、売買しない場合
-    return False
+def validate_order(portfolio, order, sold_today, **limits):
+    return order_reason(portfolio, order, sold_today, **limits) is None
 
 def update_portfolio(portfolio, order, current_time):
     symbol = order["symbol"]
