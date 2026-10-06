@@ -1,4 +1,5 @@
 import os
+import json
 import pickle
 import tempfile
 from dataclasses import dataclass
@@ -12,7 +13,7 @@ from threadpoolctl import threadpool_limits
 
 from .features import (
     BAR_SIZE, FEATURE_COLUMNS, FeatureConfig, _as_timestamp, _check_integer,
-    _prepare_frame, _segments, build_features,
+    _prepare_frame, _segments, build_features, feature_columns,
 )
 
 
@@ -101,6 +102,7 @@ def fit_model(prices, market, config, *, horizon, train_end, forest_params, work
     return ModelBundle(
         classifier, config, horizon, cutoff, len(features),
         tuple(sorted(prices)), sklearn.__version__,
+        feature_names=feature_columns(config),
     )
 
 
@@ -109,9 +111,10 @@ def _validate_bundle(bundle):
         raise ValueError("対応していないモデル形式です。")
     if bundle.sklearn_version != sklearn.__version__:
         raise ValueError(f"scikit-learn {bundle.sklearn_version} で保存されたモデルです。")
-    if bundle.feature_names != FEATURE_COLUMNS:
+    columns = feature_columns(bundle.config)
+    if bundle.feature_names != columns:
         raise ValueError("モデルの特徴量が現在の実装と一致しません。")
-    if tuple(bundle.classifier.feature_names_in_) != FEATURE_COLUMNS:
+    if tuple(bundle.classifier.feature_names_in_) != columns:
         raise ValueError("学習済み分類器の特徴量順が一致しません。")
     if not np.array_equal(bundle.classifier.classes_, [0, 1]):
         raise ValueError("分類器にはクラス0・1の両方が必要です。")
@@ -153,3 +156,28 @@ def load_model(path):
         bundle = pickle.load(stream)
     _validate_bundle(bundle)
     return bundle
+
+
+def load_model_map(path):
+    source = Path(path)
+    mapping = json.loads(source.read_text(encoding="utf-8"))
+    if not isinstance(mapping, dict) or not mapping:
+        raise ValueError("モデル対応JSONは {銘柄: モデルファイル} の空でない辞書にしてください。")
+    cache, result = {}, {}
+    for symbol, filename in mapping.items():
+        if not isinstance(symbol, str) or not isinstance(filename, str) or not filename:
+            raise ValueError("銘柄名とモデルファイルは文字列で指定してください。")
+        model_path = (source.parent / filename).resolve()
+        if model_path not in cache:
+            cache[model_path] = load_model(model_path)
+        model = cache[model_path]
+        if symbol not in model.symbols:
+            raise ValueError(f"{symbol} は指定モデルの学習対象にありません。")
+        result[symbol] = model
+    first = next(iter(result.values()))
+    for model in result.values():
+        if (model.config != first.config or model.horizon != first.horizon
+                or model.train_end != first.train_end or model.data_hash != first.data_hash
+                or model.train_start != first.train_start):
+            raise ValueError("対応表のモデルは特徴量・予測時間・学習期間・CSVを統一してください。")
+    return result

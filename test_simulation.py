@@ -5,11 +5,28 @@ import pandas as pd
 
 from functions import get_valuation_data, order_reason
 from ml import FeatureConfig, build_features
-from simulation import decision_prices, simulate
+from simulation import decision_prices, prediction_accuracy, simulate
 from train import FEATURE_PARAMS
 
 
 class SimulationTests(unittest.TestCase):
+    def test_prediction_accuracy(self):
+        index = pd.date_range("2026-09-08 09:00", periods=6, freq="5min", tz="Asia/Tokyo")
+        close = np.array([100., 100., 100., 110., 90., 100.])
+        frame = pd.DataFrame(dict(Open=close, High=close + 1, Low=close - 1,
+                                  Close=close, Volume=100), index=index)
+        times = index + pd.Timedelta(minutes=5)
+        probability = pd.Series([0.5, 0.4, 0.6, 0.8, 0.8, np.nan], index=times)
+        metrics = prediction_accuracy({"A": frame}, {"A": probability}, FeatureConfig(**FEATURE_PARAMS),
+                                      horizon=2, start=times[0], end=times[-1])
+        self.assertEqual(metrics["evaluated_count"], 3)
+        self.assertEqual(metrics["correct_count"], 2)
+        self.assertAlmostEqual(metrics["accuracy"], 2 / 3)
+        shortened = prediction_accuracy({"A": frame}, {"A": probability}, FeatureConfig(**FEATURE_PARAMS),
+                                        horizon=2, start=times[0], end=index[3])
+        self.assertEqual(shortened["evaluated_count"], 0)
+        self.assertIsNone(shortened["accuracy"])
+
     def setUp(self):
         index = pd.date_range("2026-09-08 09:00", periods=24, freq="5min", tz="Asia/Tokyo")
         close = 100 + np.arange(24) + np.sin(np.arange(24))
@@ -30,7 +47,7 @@ class SimulationTests(unittest.TestCase):
         frame.iloc[12] = np.nan
         features = build_features(frame, self.frame, FeatureConfig(**FEATURE_PARAMS))
         self.assertTrue(features.iloc[12].isna().all())
-        self.assertTrue(features.iloc[13:19].return_mean.isna().all())
+        self.assertTrue(features.iloc[13:19].return_30m.isna().all())
 
     def test_valuation(self):
         frame = self.frame.copy()

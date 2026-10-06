@@ -12,7 +12,7 @@ from matplotlib.ticker import StrMethodFormatter, MaxNLocator
 
 # このPythonファイルと同じ場所にあるlogsフォルダを読み込む
 LOG_DIR = Path(__file__).resolve().parent / "logs"
-LOG_FOLDER = "rf_validation_20261005_155058_944117"
+LOG_FOLDER = "random_validation_20261005_144505_247557"
 
 
 def load_logs(log_dir):

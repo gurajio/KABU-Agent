@@ -5,10 +5,15 @@ import numpy as np
 import pandas as pd
 
 BAR_SIZE = pd.Timedelta(minutes=5)
-FEATURE_COLUMNS = (
+LEGACY_COLUMNS = (
     "range_ratio", "close_position", "return_mean", "return_std",
     "return_autocorr", "adx", "relative_volume", "price_volume_corr",
     "market_return", "elapsed_minutes",
+)
+FEATURE_COLUMNS = (
+    "range_ratio", "close_position", "signed_body", "return_5m", "return_15m",
+    "return_30m", "return_std", "adx", "relative_volume", "market_return",
+    "excess_return_15m", "elapsed_minutes",
 )
 
 
@@ -25,8 +30,11 @@ class FeatureConfig:
     timestamp_kind: str
     sessions: tuple[tuple[str, str], ...]
     market_name: str
+    feature_set: str = "legacy10"
     # 設定作成後に自動で実行される関数
     def __post_init__(self):
+        if self.feature_set not in {"legacy10", "momentum12"}:
+            raise ValueError("feature_set は legacy10 または momentum12 を指定してください。")
         # 数値の設定を順番に確認
         for name, minimum in (
             # (設定項目の名前,許容する最小値)
@@ -168,36 +176,49 @@ def _adx(frame, config):
     return adx
 
 
+def feature_columns(config):
+    return LEGACY_COLUMNS if config.feature_set == "legacy10" else FEATURE_COLUMNS
+
+
 # 入出力は1銘柄分。指数も同じ時刻表記を使い、出力のindexは足の確定時刻。
 def build_features(prices, market, config, *, as_of=None):
     frame = _prepare_frame(prices, config, as_of=as_of)
     index_frame = _prepare_frame(market, config, market=True, as_of=as_of)
-    result = pd.DataFrame(np.nan, index=frame.index, columns=FEATURE_COLUMNS)
+    columns = feature_columns(config)
+    result = pd.DataFrame(np.nan, index=frame.index, columns=columns)
     market_return = pd.Series(np.nan, index=index_frame.index)
+    market_15m = pd.Series(np.nan, index=index_frame.index)
     for _, part in index_frame.groupby(_segments(index_frame, config)):
         market_return.loc[part.index] = part.Close.pct_change(fill_method=None)
+        market_15m.loc[part.index] = part.Close.pct_change(periods=3, fill_method=None)
     for _, part in frame.groupby(_segments(frame, config)):
         features = pd.DataFrame(index=part.index)
         span = part.High - part.Low
         returns = part.Close.pct_change(fill_method=None)
-        growth = part.Volume.div(part.Volume.shift().replace(0, np.nan)) - 1
         features["range_ratio"] = span / part.Open
         features["close_position"] = (part.Close - part.Low) / span.replace(0, np.nan)
-        features["return_mean"] = returns.rolling(config.mean_window).mean()
         features["return_std"] = returns.rolling(config.std_window).std(ddof=1)
-        features["return_autocorr"] = returns.rolling(config.autocorr_window).apply(_lag_corr, raw=True)
         features["adx"] = _adx(part, config)
         average = part.Volume.shift().rolling(config.volume_window).mean()
         features["relative_volume"] = part.Volume / average.replace(0, np.nan)
-        paired = pd.concat([returns, growth], axis=1).to_numpy()
-        correlation = np.full(len(part), np.nan)
-        for position in range(config.corr_window - 1, len(part)):
-            window = paired[position - config.corr_window + 1:position + 1]
-            if np.isfinite(window).all():
-                correlation[position] = _correlation(window[:, 0], window[:, 1])
-        features["price_volume_corr"] = correlation
+        if config.feature_set == "legacy10":
+            features["return_mean"] = returns.rolling(config.mean_window).mean()
+            features["return_autocorr"] = returns.rolling(config.autocorr_window).apply(_lag_corr, raw=True)
+            growth = part.Volume.div(part.Volume.shift().replace(0, np.nan)) - 1
+            paired = pd.concat([returns, growth], axis=1).to_numpy()
+            correlation = np.full(len(part), np.nan)
+            for position in range(config.corr_window - 1, len(part)):
+                window = paired[position - config.corr_window + 1:position + 1]
+                if np.isfinite(window).all():
+                    correlation[position] = _correlation(window[:, 0], window[:, 1])
+            features["price_volume_corr"] = correlation
+        else:
+            features["signed_body"] = (part.Close - part.Open) / part.Open
+            for minutes, periods in ((5, 1), (15, 3), (30, 6)):
+                features[f"return_{minutes}m"] = part.Close.pct_change(periods=periods, fill_method=None)
+            features["excess_return_15m"] = features["return_15m"] - market_15m.reindex(part.index)
         features["market_return"] = market_return.reindex(part.index)
         minutes = (part.index - part.index.normalize()).total_seconds() / 60
         features["elapsed_minutes"] = minutes - _clock_minutes(config.sessions[0][0])
-        result.loc[part.index] = features.loc[:, FEATURE_COLUMNS]
+        result.loc[part.index] = features.loc[:, columns]
     return result.replace([np.inf, -np.inf], np.nan)

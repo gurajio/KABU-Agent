@@ -43,7 +43,7 @@ def random_strategy(
         }
 
 
-def rf_strategy(symbol_code, price, portfolio, probability, *, buy_threshold=0.40, sell_threshold=0.35):
+def rf_strategy(symbol_code, price, portfolio, probability, *, buy_threshold=0.42, sell_threshold=0.35):
     if not 0 <= sell_threshold < buy_threshold <= 1:
         raise ValueError("閾値は 0 ≦ 売り < 買い ≦ 1 にしてください。")
     holding = portfolio["positions"].get(symbol_code, {}).get("quantity", 0)

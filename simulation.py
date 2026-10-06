@@ -10,7 +10,8 @@ from pathlib import Path
 import pandas as pd
 
 from functions import order_reason, update_portfolio, get_valuation_data, save_portfolio
-from ml import FeatureConfig, load_model, predict_up
+from ml import FeatureConfig, build_labels, load_model, predict_up
+from ml.models import load_model_map
 from strategy import random_strategy, rf_strategy
 from create_log import create_equity_log, create_trade_log, save_logs
 from train import ROOT, MODEL_PATH, TRAIN_START, TRAIN_END, PERIODS, FEATURE_PARAMS, HORIZON, load_data, data_hash
@@ -19,6 +20,28 @@ INITIAL_CASH = 100_000_000
 SEED = 43
 CASH_RESERVE = 0.10
 POSITION_LIMIT = 0.10
+
+
+def prediction_accuracy(prices, probabilities, config, *, horizon, start, end):
+    evaluated = correct = up_count = 0
+    for symbol, probability in probabilities.items():
+        labels = build_labels(prices[symbol], config, horizon=horizon, as_of=end)
+        target = labels.target.reindex(probability.index)
+        exit_time = labels.exit_time.reindex(probability.index)
+        valid = (probability.notna() & target.notna() & exit_time.le(end)
+                 & (probability.index >= start) & (probability.index <= end))
+        target = target.loc[valid]
+        prediction = probability.loc[valid].ge(0.5)
+        evaluated += len(target)
+        correct += int(prediction.eq(target.eq(1)).sum())
+        up_count += int(target.sum())
+    return {
+        "threshold": 0.5, "evaluated_count": evaluated, "correct_count": correct,
+        "accuracy": correct / evaluated if evaluated else None,
+        "majority_accuracy": max(up_count, evaluated - up_count) / evaluated if evaluated else None,
+        "actual_up_count": up_count,
+    }
+
 
 def trade_times(prices, start, end):
     times = pd.DatetimeIndex(sorted({stamp for frame in prices.values() for stamp in frame.index}))
@@ -142,16 +165,22 @@ def main():
         parser.error("1銘柄の配分上限は0より大きく1以下にしてください。")
     start, end = map(pd.Timestamp, PERIODS[args.period])
     model = None
+    model_map = None
     model_path = (ROOT / args.model).resolve()
     fingerprint = data_hash()
     if args.strategy == "rf":
         if not model_path.exists():
             raise FileNotFoundError(f"先にtrain.pyを実行してください: {model_path}")
-        model = load_model(model_path)
+        if model_path.suffix.lower() == ".json":
+            model_map = load_model_map(model_path)
+            model = next(iter(model_map.values()))
+        else:
+            model = load_model(model_path)
         if getattr(model, "data_hash", None) != fingerprint or getattr(model, "train_start", None) != TRAIN_START:
             raise ValueError("モデルと現在のCSV・学習開始日が一致しません。train.pyで新しいモデルを作成してください。")
         if (model.train_end != pd.Timestamp(TRAIN_END) or model.train_end >= start
-                or model.config != FeatureConfig(**FEATURE_PARAMS) or model.horizon != HORIZON):
+                or model.config != FeatureConfig(**dict(FEATURE_PARAMS, feature_set=model.config.feature_set))
+                or model.horizon != HORIZON):
             raise ValueError("モデルの学習条件が現在の設定と異なります。train.pyで再学習してください。")
     prices, market = load_data(end=end)
     print(f"手法: {args.strategy}、期間: {start.date()} 〜 {end.date()}、銘柄数: {len(prices)}")
@@ -159,16 +188,29 @@ def main():
           f"1銘柄上限: {args.position_limit:.0%}（購入時の総資産に対する割合）")
     probabilities = {}
     if model is not None:
-        if set(model.symbols) != set(prices):
+        if (set(model_map) if model_map is not None else set(model.symbols)) != set(prices):
             raise ValueError("モデルと現在の対象銘柄が異なります。train.pyで再学習してください。")
         print(f"RF予測: 使用コア数={model.classifier.n_jobs}、各時刻までの確定足から計算")
         for symbol, frame in prices.items():
-            result = predict_up(model, frame, market, as_of=end)
+            chosen = model_map[symbol] if model_map is not None else model
+            result = predict_up(chosen, frame, market, as_of=end)
             probabilities[symbol] = result.loc[(result.index >= start) & (result.index <= end)]
         count = sum(int(series.notna().sum()) for series in probabilities.values())
         print(f"予測できた銘柄・時刻の組数: {count}")
         if not count:
             raise ValueError("指定期間に有効な予測がありません。")
+    validation_metrics = None
+    if model is not None and args.period == "validation":
+        validation_metrics = prediction_accuracy(
+            prices, probabilities, model.config, horizon=model.horizon, start=start, end=end,
+        )
+        print(f"検証評価件数: {validation_metrics['evaluated_count']:,}件、"
+              f"正解件数: {validation_metrics['correct_count']:,}件")
+        if validation_metrics["accuracy"] is None:
+            print("検証正答率: 算出不可（評価可能な正解がありません）")
+        else:
+            print(f"検証正答率: {validation_metrics['accuracy']:.2%}（上昇判定の閾値=0.5）")
+            print(f"多数派を常に予測した場合の正答率: {validation_metrics['majority_accuracy']:.2%}")
     diagnostics = {}
     portfolio, trades, equity, skipped = simulate(
         prices, probabilities, strategy=args.strategy, start=start, end=end,
@@ -199,9 +241,12 @@ def main():
         "fill_rule": "直前までに確定した足で判断し、現在の足のOpenで約定。手数料・スリッページ0。",
         "final_assets": equity[-1]["total_assets"],
         "model_path": str(model_path) if model is not None else None,
+        "model_mapping": json.loads(model_path.read_text(encoding="utf-8")) if model_map is not None else None,
         "data_hash": fingerprint,
         "data_quality": "欠損は補完せず、特徴量不足では判断なし。取得条件・期間網羅性は未確認。",
         "features": asdict(model.config) if model is not None else None,
+        "feature_names": list(model.feature_names) if model is not None else None,
+        "validation_metrics": validation_metrics,
     }
     with (output / "settings.json").open("w", encoding="utf-8") as stream:
         json.dump(metadata, stream, ensure_ascii=False, indent=2, allow_nan=False)
